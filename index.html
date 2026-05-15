@@ -546,6 +546,365 @@
     color: rgba(248, 245, 240, 0.4); text-transform: uppercase;
   }
   
+  /* COMPARATEUR AVANT / APRÈS */
+  .compare-section { margin-bottom: 200px; }
+  .compare-intro {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 300; line-height: 1.6;
+    color: rgba(248, 245, 240, 0.75);
+    max-width: 720px; margin-bottom: 64px; font-style: italic;
+  }
+  
+  .compare-block {
+    margin-bottom: 100px;
+    background: rgba(248, 245, 240, 0.02);
+    border: 1px solid rgba(196, 165, 116, 0.15);
+    overflow: hidden;
+  }
+  .compare-block:last-child { margin-bottom: 0; }
+  
+  .compare-header {
+    padding: 32px 40px;
+    border-bottom: 1px solid rgba(196, 165, 116, 0.1);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px; align-items: center;
+  }
+  .compare-number {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 56px;
+    color: var(--rust);
+    line-height: 1;
+    font-style: italic;
+  }
+  .compare-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+    color: var(--bone);
+  }
+  .compare-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(196, 165, 116, 0.7);
+  }
+  .compare-toggle {
+    display: flex; gap: 8px;
+  }
+  .compare-toggle-btn {
+    background: transparent;
+    border: 1px solid rgba(196, 165, 116, 0.3);
+    color: rgba(248, 245, 240, 0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .compare-toggle-btn:hover {
+    color: var(--bone);
+    border-color: var(--gold);
+  }
+  .compare-toggle-btn.active {
+    background: var(--rust);
+    color: var(--bone);
+    border-color: var(--rust);
+  }
+  
+  .compare-version {
+    display: none;
+  }
+  .compare-version.active {
+    display: block;
+  }
+  
+  .compare-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    user-select: none;
+    background: var(--ink);
+  }
+  .compare-before, .compare-after {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .compare-after {
+    clip-path: inset(0 50% 0 0);
+    transition: clip-path 0.05s linear;
+  }
+  
+  .compare-handle {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--bone);
+    transform: translateX(-50%);
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+  .compare-handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--rust);
+    border: 3px solid var(--bone);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .compare-handle::after {
+    content: '⟷';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--bone);
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 1;
+  }
+  
+  .compare-slider {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    cursor: ew-resize;
+    margin: 0; padding: 0;
+    z-index: 10;
+  }
+  .compare-slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 48px; height: 100%;
+    background: transparent;
+    cursor: ew-resize;
+  }
+  .compare-slider::-moz-range-thumb {
+    width: 48px; height: 100%;
+    background: transparent;
+    border: none;
+    cursor: ew-resize;
+  }
+  
+  .compare-labels {
+    position: absolute;
+    top: 24px;
+    left: 0; right: 0;
+    display: flex; justify-content: space-between;
+    padding: 0 32px;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .compare-label-tag {
+    background: rgba(10, 9, 8, 0.85);
+    color: var(--bone);
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(196, 165, 116, 0.3);
+    backdrop-filter: blur(8px);
+  }
+  .compare-label-tag.after { color: var(--gold); border-color: var(--gold); }
+  
+  .compare-notes {
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    border-top: 1px solid rgba(196, 165, 116, 0.1);
+  }
+  .compare-note-block { }
+  .compare-note-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .compare-note-label.problem { color: var(--rust); }
+  .compare-note-label.solution { color: var(--gold); }
+  .compare-note-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(248, 245, 240, 0.75);
+  }
+  
+  .compare-disclaimer {
+    margin-top: 56px;
+    padding: 20px 24px;
+    background: rgba(184, 68, 44, 0.04);
+    border-left: 3px solid var(--rust);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(248, 245, 240, 0.7);
+  }
+
+  /* PULSE MARCHÉ */
+  .pulse-section { margin-bottom: 200px; }
+  .pulse-intro {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 300; line-height: 1.6;
+    color: rgba(248, 245, 240, 0.75);
+    max-width: 700px; margin-bottom: 64px; font-style: italic;
+  }
+  .pulse-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 20px; margin-bottom: 80px;
+  }
+  .pulse-tile {
+    background: rgba(196, 165, 116, 0.03);
+    border: 1px solid rgba(196, 165, 116, 0.15);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+    transition: all 0.5s;
+  }
+  .pulse-tile:hover {
+    background: rgba(196, 165, 116, 0.06);
+    border-color: rgba(196, 165, 116, 0.3);
+    transform: translateY(-4px);
+  }
+  .pulse-tile-large {
+    background: linear-gradient(135deg, rgba(184, 68, 44, 0.08), rgba(184, 68, 44, 0.02));
+    border-color: rgba(184, 68, 44, 0.2);
+  }
+  .pulse-tile-large:hover {
+    background: linear-gradient(135deg, rgba(184, 68, 44, 0.12), rgba(184, 68, 44, 0.04));
+    border-color: var(--rust);
+  }
+  .pulse-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.6);
+    margin-bottom: 20px;
+  }
+  .pulse-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 300; line-height: 1;
+    margin-bottom: 12px;
+    display: flex; align-items: baseline; gap: 8px;
+    color: var(--bone);
+  }
+  .pulse-tile-large .pulse-value { font-size: 72px; }
+  .pulse-tile:not(.pulse-tile-large) .pulse-value { font-size: 48px; }
+  .pulse-value-positive .pulse-number { color: #6BBF7A; font-style: italic; }
+  .pulse-value-accent .pulse-number { color: var(--rust); font-style: italic; }
+  .pulse-unit {
+    font-size: 0.4em;
+    color: var(--gold);
+    font-weight: 400;
+  }
+  .pulse-tile-large .pulse-unit { font-size: 32px; }
+  .pulse-context {
+    font-size: 13px;
+    color: rgba(248, 245, 240, 0.55);
+    margin-top: 12px;
+  }
+  .pulse-mini-trend {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 5px 12px;
+    background: rgba(107, 191, 122, 0.08);
+    border: 1px solid rgba(107, 191, 122, 0.25);
+    color: #6BBF7A;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+  }
+  
+  .pulse-neighborhoods { margin-bottom: 48px; }
+  .pulse-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(248, 245, 240, 0.1);
+  }
+  .pulse-table {
+    width: 100%; border-collapse: collapse;
+    font-family: 'Manrope', sans-serif;
+  }
+  .pulse-table th {
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.5);
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(248, 245, 240, 0.1);
+    font-weight: 400;
+  }
+  .pulse-table td {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(248, 245, 240, 0.05);
+    color: rgba(248, 245, 240, 0.85);
+    font-size: 15px;
+    vertical-align: middle;
+    transition: background 0.3s;
+  }
+  .pulse-table tr:hover td { background: rgba(184, 68, 44, 0.03); }
+  .pulse-table td strong { color: var(--bone); font-weight: 500; }
+  .pulse-bar-wrap {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .pulse-bar {
+    display: inline-block;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rust), var(--gold));
+    border-radius: 2px;
+    min-width: 30px;
+  }
+  .pulse-price {
+    font-family: 'Fraunces', serif;
+    font-weight: 400; font-size: 17px;
+    color: var(--bone);
+  }
+  
+  .pulse-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 0;
+    border-top: 1px solid rgba(248, 245, 240, 0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em;
+    color: rgba(248, 245, 240, 0.4);
+    margin-bottom: 56px;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .pulse-sources-label {
+    color: var(--gold);
+    margin-right: 8px;
+  }
+  .pulse-pitch {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; line-height: 1.5;
+    font-weight: 300; font-style: italic;
+    color: rgba(248, 245, 240, 0.85);
+    max-width: 720px;
+    padding-left: 24px;
+    border-left: 3px solid var(--rust);
+  }
+
   /* CARTE */
   .map-section { margin-bottom: 160px; }
   .map-intro {
@@ -694,6 +1053,35 @@
     .calc-unit { font-size: 18px; }
     .calc-preset { font-size: 10px; padding: 6px 12px; }
     
+    .pulse-section { margin-bottom: 120px; }
+    .pulse-intro { font-size: 17px; margin-bottom: 40px; }
+    .pulse-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px; }
+    .pulse-tile { padding: 28px 24px; }
+    .pulse-tile-large .pulse-value { font-size: 56px; }
+    .pulse-tile:not(.pulse-tile-large) .pulse-value { font-size: 40px; }
+    .pulse-table th, .pulse-table td { font-size: 13px; padding: 14px 8px; }
+    .pulse-table td:last-child { display: none; }
+    .pulse-bar { display: none; }
+    .pulse-price { font-size: 16px; }
+    .pulse-pitch { font-size: 18px; padding-left: 18px; }
+    .pulse-footer { flex-direction: column; align-items: flex-start; font-size: 9px; }
+    
+    .compare-section { margin-bottom: 120px; }
+    .compare-intro { font-size: 17px; margin-bottom: 40px; }
+    .compare-block { margin-bottom: 56px; }
+    .compare-header { grid-template-columns: auto 1fr; gap: 20px; padding: 24px 20px; }
+    .compare-toggle { grid-column: 1 / -1; flex-wrap: wrap; }
+    .compare-toggle-btn { font-size: 9px; padding: 8px 12px; flex: 1; }
+    .compare-number { font-size: 40px; }
+    .compare-title { font-size: 18px; }
+    .compare-subtitle { font-size: 10px; }
+    .compare-labels { padding: 0 16px; top: 16px; }
+    .compare-label-tag { font-size: 9px; padding: 6px 10px; }
+    .compare-handle::before { width: 36px; height: 36px; }
+    .compare-notes { grid-template-columns: 1fr; gap: 24px; padding: 24px 20px; }
+    .compare-note-text { font-size: 14px; }
+    .compare-disclaimer { font-size: 14px; padding: 16px 18px; }
+    
     .map-section { margin-bottom: 100px; }
     .map-intro { font-size: 17px; margin-bottom: 40px; }
     .map-wrapper { grid-template-columns: 1fr; gap: 32px; padding: 24px 20px; }
@@ -724,8 +1112,9 @@
   <div class="nav-links">
     <a href="#about">À propos</a>
     <a href="#parcours">Parcours</a>
-    <a href="#competences">Compétences</a>
     <a href="#objections">Pourquoi moi</a>
+    <a href="#pulse">Marché</a>
+    <a href="#avantapres">Avant/Après</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -1018,8 +1407,137 @@
       </div>
     </div>
     
+    <!-- PULSE MARCHÉ LE MANS -->
+    <div class="pulse-section" id="pulse">
+      <div class="section-tag">05 — Pulse marché Le Mans</div>
+      <h2 class="section-title">
+        Ma veille du marché,<br><em>en quelques chiffres</em>.
+      </h2>
+      
+      <p class="pulse-intro">
+        Connaître le marché de votre secteur avant d'arriver en agence me semble
+        être la base. Voici l'état du marché manceau au moment où j'écris ces lignes,
+        compilé à partir des sources publiques que je suis chaque mois.
+      </p>
+      
+      <div class="pulse-grid">
+        <div class="pulse-tile pulse-tile-large">
+          <div class="pulse-label">Prix moyen au m²</div>
+          <div class="pulse-value">
+            <span class="pulse-number" data-target="2080" data-format="int">2 080</span><span class="pulse-unit">€</span>
+          </div>
+          <div class="pulse-context">Le Mans · Tous biens confondus</div>
+          <div class="pulse-mini-trend">+0,3% sur 3 mois</div>
+        </div>
+        
+        <div class="pulse-tile">
+          <div class="pulse-label">Évolution 12 mois</div>
+          <div class="pulse-value pulse-value-positive">
+            <span class="pulse-number" data-target="4.5" data-format="decimal" data-prefix="+">+4,5</span><span class="pulse-unit">%</span>
+          </div>
+          <div class="pulse-context">Appartements en hausse</div>
+        </div>
+        
+        <div class="pulse-tile">
+          <div class="pulse-label">Loyer moyen au m²</div>
+          <div class="pulse-value">
+            <span class="pulse-number" data-target="12.4" data-format="decimal">12,4</span><span class="pulse-unit">€/mois</span>
+          </div>
+          <div class="pulse-context">Marché locatif tendu</div>
+        </div>
+        
+        <div class="pulse-tile">
+          <div class="pulse-label">Rendement locatif</div>
+          <div class="pulse-value pulse-value-accent">
+            <span class="pulse-number" data-target="7.4" data-format="decimal">7,4</span><span class="pulse-unit">%</span>
+          </div>
+          <div class="pulse-context">T2 type · Au-dessus de Paris ou Lyon</div>
+        </div>
+      </div>
+      
+      <div class="pulse-neighborhoods">
+        <h3 class="pulse-sub">→ Prix m² par quartier</h3>
+        
+        <table class="pulse-table">
+          <thead>
+            <tr>
+              <th>Quartier</th>
+              <th>Prix m² moyen</th>
+              <th>Profil acheteur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Jacobins / Centre</strong></td>
+              <td>
+                <div class="pulse-bar-wrap">
+                  <span class="pulse-bar" style="width: 120px"></span>
+                  <span class="pulse-price">2 760 €</span>
+                </div>
+              </td>
+              <td>Premium · Patrimoine historique</td>
+            </tr>
+            <tr>
+              <td><strong>Bollée</strong></td>
+              <td>
+                <div class="pulse-bar-wrap">
+                  <span class="pulse-bar" style="width: 105px"></span>
+                  <span class="pulse-price">2 430 €</span>
+                </div>
+              </td>
+              <td>Familial · Très recherché</td>
+            </tr>
+            <tr>
+              <td><strong>Gare Sud / Jaurès</strong></td>
+              <td>
+                <div class="pulse-bar-wrap">
+                  <span class="pulse-bar" style="width: 90px"></span>
+                  <span class="pulse-price">2 100 €</span>
+                </div>
+              </td>
+              <td>Investisseur · TGV Paris 1h</td>
+            </tr>
+            <tr>
+              <td><strong>Université / Ribay</strong></td>
+              <td>
+                <div class="pulse-bar-wrap">
+                  <span class="pulse-bar" style="width: 78px"></span>
+                  <span class="pulse-price">1 850 €</span>
+                </div>
+              </td>
+              <td>Locatif étudiant · Dynamique</td>
+            </tr>
+            <tr>
+              <td><strong>Pontlieue / Rocade</strong></td>
+              <td>
+                <div class="pulse-bar-wrap">
+                  <span class="pulse-bar" style="width: 70px"></span>
+                  <span class="pulse-price">1 680 €</span>
+                </div>
+              </td>
+              <td>Accessible · Primo-accédant</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="pulse-footer">
+        <div class="pulse-sources">
+          <span class="pulse-sources-label">Sources :</span>
+          MeilleursAgents · SeLoger · DVF Gouv. · Notaires de France
+        </div>
+        <div class="pulse-date">Mis à jour : Mai 2026</div>
+      </div>
+      
+      <p class="pulse-pitch">
+        Si je suis capable de tenir cette veille en autonomie avant même d'avoir
+        commencé l'alternance, imaginez ce que je peux apporter à votre équipe
+        après deux ans à vos côtés.
+      </p>
+    </div>
+    
     <div class="calc-section" id="calculator">
-      <div class="section-tag">05 — Un petit aperçu</div>
+      <div class="section-tag">06 — Un petit aperçu</div>
       <h2 class="section-title">
         Un outil construit<br><em>en direct, ici</em>.
       </h2>
@@ -1097,8 +1615,150 @@
       </div>
     </div>
     
+    <!-- AVANT / APRÈS -->
+    <div class="compare-section" id="avantapres">
+      <div class="section-tag">07 — Avant / Après</div>
+      <h2 class="section-title">
+        Le potentiel<br><em>qu'on ne voit pas tout de suite</em>.
+      </h2>
+      
+      <p class="compare-intro">
+        Certains biens semblent invendables au premier regard. Pourtant, derrière une
+        façade dégradée se cache souvent un vrai potentiel. Voici deux exemples concrets
+        de ce que je peux faire pour aider une agence à révéler ce potentiel auprès
+        de futurs acquéreurs.
+      </p>
+      
+      <!-- BIEN #1 -->
+      <div class="compare-block">
+        <div class="compare-header">
+          <div class="compare-number">01</div>
+          <div>
+            <div class="compare-title">Longère en pierre, en pleine campagne</div>
+            <div class="compare-subtitle">Bien difficile à projeter · Sarthe</div>
+          </div>
+          <div></div>
+        </div>
+        
+        <div class="compare-version active" data-version="default">
+          <div class="compare-wrapper">
+            <img class="compare-before" src="images/Photo source 1.png" alt="Avant rénovation">
+            <img class="compare-after" src="images/Rendu 1.png" alt="Après rénovation">
+            <div class="compare-labels">
+              <span class="compare-label-tag">Avant</span>
+              <span class="compare-label-tag after">Après</span>
+            </div>
+            <div class="compare-handle"></div>
+            <input type="range" class="compare-slider" min="0" max="100" value="50">
+          </div>
+          
+          <div class="compare-notes">
+            <div class="compare-note-block">
+              <div class="compare-note-label problem">→ Le frein à la vente</div>
+              <div class="compare-note-text">
+                Façade envahie par le lierre, ouvertures murées, état général qui
+                effraie un acheteur classique. Difficile pour lui de se projeter
+                au-delà de l'image qu'il voit.
+              </div>
+            </div>
+            <div class="compare-note-block">
+              <div class="compare-note-label solution">→ Ce que je propose</div>
+              <div class="compare-note-text">
+                Une projection visuelle réaliste, basée sur le bâti d'origine, permet
+                de montrer le potentiel final. Le bien passe de "tas de pierres" à
+                "maison de caractère restaurée".
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- BIEN #2 AVEC DEUX OPTIONS -->
+      <div class="compare-block">
+        <div class="compare-header">
+          <div class="compare-number">02</div>
+          <div>
+            <div class="compare-title">Maison de bourg avec ancien commerce</div>
+            <div class="compare-subtitle">Bien polyvalent · Deux usages possibles</div>
+          </div>
+          <div class="compare-toggle">
+            <button class="compare-toggle-btn active" data-target="maison">Version maison</button>
+            <button class="compare-toggle-btn" data-target="commerce">Version commerce</button>
+          </div>
+        </div>
+        
+        <div class="compare-version active" data-version="maison">
+          <div class="compare-wrapper">
+            <img class="compare-before" src="images/Photo source 2.png" alt="Avant rénovation">
+            <img class="compare-after" src="images/Rendu 2 maison.png" alt="Après - version maison">
+            <div class="compare-labels">
+              <span class="compare-label-tag">Avant</span>
+              <span class="compare-label-tag after">Après · Habitation</span>
+            </div>
+            <div class="compare-handle"></div>
+            <input type="range" class="compare-slider" min="0" max="100" value="50">
+          </div>
+          
+          <div class="compare-notes">
+            <div class="compare-note-block">
+              <div class="compare-note-label problem">→ Le frein à la vente</div>
+              <div class="compare-note-text">
+                Façade dégradée, devanture commerciale fermée, peu engageant pour
+                un particulier qui cherche un lieu de vie. Le bien parait abandonné.
+              </div>
+            </div>
+            <div class="compare-note-block">
+              <div class="compare-note-label solution">→ Cible : familles, primo-accédants</div>
+              <div class="compare-note-text">
+                Façade nettoyée, volets repeints, ouvertures en habitation,
+                ambiance chaleureuse en soirée. Le bien devient un projet de vie
+                concret pour une famille.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="compare-version" data-version="commerce">
+          <div class="compare-wrapper">
+            <img class="compare-before" src="images/Photo source 2.png" alt="Avant rénovation">
+            <img class="compare-after" src="images/Rendu 2 commerce.png" alt="Après - version commerce">
+            <div class="compare-labels">
+              <span class="compare-label-tag">Avant</span>
+              <span class="compare-label-tag after">Après · Commerce</span>
+            </div>
+            <div class="compare-handle"></div>
+            <input type="range" class="compare-slider" min="0" max="100" value="50">
+          </div>
+          
+          <div class="compare-notes">
+            <div class="compare-note-block">
+              <div class="compare-note-label problem">→ Le frein à la vente</div>
+              <div class="compare-note-text">
+                Devanture obsolète, peu visible, sans identité claire. Difficile
+                pour un porteur de projet commercial de s'y projeter.
+              </div>
+            </div>
+            <div class="compare-note-block">
+              <div class="compare-note-label solution">→ Cible : artisans, restaurateurs</div>
+              <div class="compare-note-text">
+                Vitrine moderne, façade premium, identité visuelle haut de gamme.
+                Le même bien parle désormais à un public d'investisseurs ou de
+                créateurs de commerces.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="compare-disclaimer">
+        Ces rendus sont des projections de potentiel, pas des engagements de résultat
+        ni des outils de simulation officielle. Leur seul objectif : aider un acquéreur
+        à se projeter et l'agence à élargir son marché potentiel pour un même bien.
+      </div>
+    </div>
+    
     <div class="map-section">
-      <div class="section-tag">06 — Sur quel secteur</div>
+      <div class="section-tag">08 — Sur quel secteur</div>
       <h2 class="section-title">
         Là où je peux<br><em>vraiment intervenir</em>.
       </h2>
@@ -1498,6 +2158,72 @@ const fadeObserver = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 fadeInElements.forEach(el => fadeObserver.observe(el));
+
+// ============ ANIMATION DES CHIFFRES PULSE MARCHÉ ============
+const counterElements = document.querySelectorAll('.pulse-number[data-target]');
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseFloat(el.dataset.target);
+      const format = el.dataset.format || 'int';
+      const prefix = el.dataset.prefix || '';
+      const duration = 1800;
+      const start = performance.now();
+      
+      function animate(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+        
+        if (format === 'int') {
+          el.textContent = prefix + Math.round(current).toLocaleString('fr-FR');
+        } else {
+          el.textContent = prefix + current.toFixed(1).replace('.', ',');
+        }
+        
+        if (progress < 1) requestAnimationFrame(animate);
+      }
+      
+      requestAnimationFrame(animate);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+counterElements.forEach(el => counterObserver.observe(el));
+
+// ============ COMPARATEURS AVANT / APRÈS ============
+document.querySelectorAll('.compare-wrapper').forEach(wrapper => {
+  const slider = wrapper.querySelector('.compare-slider');
+  const afterImg = wrapper.querySelector('.compare-after');
+  const handle = wrapper.querySelector('.compare-handle');
+  
+  function updateClip(val) {
+    afterImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+    handle.style.left = `${val}%`;
+  }
+  
+  slider.addEventListener('input', (e) => updateClip(e.target.value));
+  updateClip(50);
+});
+
+// ============ TOGGLE BIEN #2 (MAISON / COMMERCE) ============
+document.querySelectorAll('.compare-toggle-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    const group = btn.closest('.compare-block');
+    
+    group.querySelectorAll('.compare-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    group.querySelectorAll('.compare-version').forEach(v => {
+      v.classList.toggle('active', v.dataset.version === target);
+    });
+  });
+});
 </script>
 
 </body>
