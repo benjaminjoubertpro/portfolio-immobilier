@@ -263,6 +263,42 @@
   }
   .section-title em { font-style: italic; color: var(--gold); }
   
+  /* PHOTO DE PROFIL */
+  .about-photo-wrap {
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+  }
+  .about-photo {
+    width: 180px;
+    height: 220px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(15%) contrast(1.05);
+    transition: filter 0.4s;
+  }
+  .about-photo:hover { filter: grayscale(0%) contrast(1.05); }
+  .about-photo-frame {
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 180px; height: 220px;
+    border: 2px solid var(--rust);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .about-photo-tag {
+    position: absolute;
+    bottom: -14px; right: -14px;
+    background: var(--rust);
+    color: var(--cream);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+  }
+
   /* À PROPOS */
   .about-grid {
     display: grid; grid-template-columns: 1fr 1.3fr;
@@ -1018,6 +1054,8 @@
     .section-title { font-size: clamp(36px, 9vw, 56px); margin-bottom: 56px; }
     .section-tag { font-size: 10px; margin-bottom: 24px; }
     
+    .about-photo { width: 140px; height: 172px; }
+    .about-photo-frame { width: 140px; height: 172px; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; margin-bottom: 120px; }
     .about-text p { font-size: 17px; }
     .about-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -1201,6 +1239,11 @@
       
       <div class="about-grid">
         <div class="about-text">
+          <div class="about-photo-wrap">
+            <img class="about-photo" src="images/moi.webp" alt="Benjamin Joubert">
+            <div class="about-photo-frame"></div>
+            <span class="about-photo-tag">Benjamin Joubert</span>
+          </div>
           <p>
             Mon parcours n'est pas le plus classique pour candidater à un BTS Professions
             Immobilières. J'ai passé deux ans en alternance comme <strong>développeur web</strong>
