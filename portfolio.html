@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjamin Joubert — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F1EA;
+    --cream-dark: #E8E2D5;
+    --ink: #1A1814;
+    --black: #0A0908;
+    --rust: #B8442C;
+    --rust-deep: #8C2E1E;
+    --gold: #C4A574;
+    --ash: #2A2825;
+    --bone: #F8F5F0;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { 
+    font-family: 'Manrope', sans-serif;
+    background: var(--bone);
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  
+  ::selection { background: var(--rust); color: var(--bone); }
+  
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    mix-blend-mode: difference; color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .nav-logo { font-weight: 500; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: inherit; text-decoration: none; transition: opacity 0.3s; }
+  .nav-links a:hover { opacity: 0.5; }
+  
+  /* HEADER ÉDITORIAL */
+  .header-section {
+    min-height: 100vh; background: var(--cream);
+    padding: 140px 64px 80px;
+    position: relative; overflow: hidden;
+  }
+  .header-section::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(184, 68, 44, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(196, 165, 116, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .editorial-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--rust); margin-bottom: 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .editorial-tag::before {
+    content: ''; width: 40px; height: 1px; background: var(--rust);
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(56px, 9vw, 144px); line-height: 0.9;
+    letter-spacing: -0.03em; color: var(--ink); margin-bottom: 48px;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-title em {
+    font-style: italic; font-weight: 400; color: var(--rust);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; margin-top: 80px; max-width: 1400px;
+  }
+  .hero-bio {
+    font-family: 'Fraunces', serif; font-size: 22px;
+    line-height: 1.5; font-weight: 300; color: var(--ink); max-width: 540px;
+  }
+  .hero-bio strong {
+    font-weight: 500;
+    background: linear-gradient(180deg, transparent 60%, rgba(184, 68, 44, 0.15) 60%);
+    padding: 0 4px;
+  }
+  .hero-meta {
+    display: flex; flex-direction: column; gap: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em; color: var(--ash);
+  }
+  .meta-row {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 24px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .meta-label { text-transform: uppercase; color: var(--rust); font-weight: 500; }
+  .meta-value {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px; letter-spacing: 0; color: var(--ink);
+  }
+  .scroll-indicator {
+    position: absolute; bottom: 40px; left: 64px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ash);
+    display: flex; align-items: center; gap: 16px;
+    animation: bounce 2.5s ease-in-out infinite;
+  }
+  .scroll-indicator::after { content: '↓'; font-size: 16px; color: var(--rust); }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  
+  /* PARALLAXE */
+  .parallax-section {
+    height: 350vh; position: relative; overflow: hidden;
+  }
+  .parallax-stage {
+    position: sticky; top: 0;
+    height: 100vh; width: 100%;
+    overflow: hidden; background: var(--cream);
+  }
+  .parallax-sky {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, 
+      #F5F1EA 0%, #EEDCC4 30%, #D4B896 55%,
+      #8C6B52 75%, #2A2520 95%, var(--black) 100%);
+    z-index: 0;
+  }
+  .parallax-sun {
+    position: absolute;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle, #FFE5B4 0%, #F5A623 60%, #B8442C 100%);
+    box-shadow: 0 0 100px rgba(245, 166, 35, 0.4), 0 0 200px rgba(245, 166, 35, 0.2);
+    top: 12%; right: 18%;
+    will-change: transform; z-index: 1;
+  }
+  .parallax-clouds {
+    position: absolute; top: 15%; left: 0;
+    width: 200%; height: 30%;
+    will-change: transform; z-index: 2; opacity: 0.6;
+  }
+  .cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 100px; filter: blur(2px);
+  }
+  .building-layer {
+    position: absolute; bottom: 80px;
+    width: 250%; height: 100%;
+    will-change: transform;
+    display: flex; align-items: flex-end;
+  }
+  .layer-far { z-index: 3; opacity: 0.55; bottom: 70px; }
+  .layer-mid { z-index: 4; opacity: 0.85; }
+  .layer-near { z-index: 5; }
+  .building {
+    position: relative; flex-shrink: 0; margin-right: 20px;
+  }
+  .sign {
+    position: absolute;
+    font-family: 'Fraunces', serif; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transform-origin: top center;
+    z-index: 10; pointer-events: none;
+  }
+  .sign-board {
+    padding: 8px 18px; border: 2px solid currentColor;
+    background: var(--cream); color: var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    font-size: 13px; white-space: nowrap;
+  }
+  .sign-vendu .sign-board {
+    background: var(--rust); color: var(--cream);
+    border-color: var(--rust-deep);
+    box-shadow: 4px 4px 0 var(--rust-deep);
+  }
+  .sign-stick {
+    width: 3px; height: 30px;
+    background: var(--ink); margin: 0 auto;
+  }
+  .ground {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, transparent, var(--ink));
+    z-index: 6;
+  }
+  .parallax-title {
+    position: absolute;
+    top: 30%; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 7;
+    color: var(--ink); pointer-events: none;
+    width: 90%; max-width: 900px;
+    transition: color 0.5s, opacity 0.5s;
+  }
+  .parallax-title.dark-mode { color: var(--cream); }
+  .parallax-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase;
+    margin-bottom: 24px; opacity: 0.9;
+  }
+  .parallax-heading {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(40px, 6vw, 88px); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .parallax-heading em { font-style: italic; color: var(--rust); }
+  .transition-sign {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(0);
+    z-index: 20; text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform, opacity;
+  }
+  .transition-sign.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-4deg) scale(1);
+  }
+  .transition-board {
+    background: var(--rust); color: var(--cream);
+    border: 4px solid var(--rust-deep);
+    padding: 32px 80px;
+    font-family: 'Fraunces', serif; font-weight: 700;
+    font-size: clamp(56px, 9vw, 120px);
+    letter-spacing: -0.01em; line-height: 1;
+    box-shadow: 12px 12px 0 var(--black), 0 40px 80px rgba(0,0,0,0.5);
+  }
+  .transition-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--cream); margin-top: 24px;
+    background: var(--ink);
+    display: inline-block; padding: 10px 24px;
+  }
+  
+  /* SECTION NOIRE */
+  .dark-section {
+    background: var(--black); color: var(--bone);
+    padding: 160px 64px 80px; position: relative;
+  }
+  .dark-section::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: 
+      radial-gradient(circle at 30% 20%, rgba(184, 68, 44, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(196, 165, 116, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .container {
+    max-width: 1400px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-tag::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(48px, 7vw, 96px); line-height: 0.95;
+    letter-spacing: -0.03em; margin-bottom: 80px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  
+  /* À PROPOS */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.3fr;
+    gap: 80px; margin-bottom: 200px;
+  }
+  .about-text p {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    line-height: 1.6; font-weight: 300;
+    margin-bottom: 24px; color: rgba(248, 245, 240, 0.85);
+  }
+  .about-text p strong { color: var(--gold); font-weight: 500; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 32px; align-content: start;
+  }
+  .stat-card {
+    padding: 32px;
+    border: 1px solid rgba(196, 165, 116, 0.2);
+    background: rgba(196, 165, 116, 0.03);
+    transition: all 0.4s;
+  }
+  .stat-card:hover {
+    border-color: var(--gold);
+    background: rgba(196, 165, 116, 0.08);
+    transform: translateY(-4px);
+  }
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 56px; font-weight: 300; line-height: 1;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .stat-number-small {
+    font-size: 22px; margin-left: 4px;
+    color: rgba(196, 165, 116, 0.5);
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.6); line-height: 1.5;
+  }
+  
+  /* TIMELINE */
+  .timeline { margin-bottom: 200px; }
+  .timeline-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 64px; padding: 48px 0;
+    border-top: 1px solid rgba(248, 245, 240, 0.1);
+    transition: all 0.4s;
+  }
+  .timeline-item:hover {
+    padding-left: 24px; border-top-color: var(--rust);
+  }
+  .timeline-item:last-child {
+    border-bottom: 1px solid rgba(248, 245, 240, 0.1);
+  }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.1em;
+    color: var(--gold); padding-top: 4px;
+  }
+  .timeline-title {
+    font-family: 'Fraunces', serif; font-size: 32px;
+    font-weight: 400; margin-bottom: 12px; letter-spacing: -0.01em;
+  }
+  .timeline-company {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--rust); margin-bottom: 16px;
+  }
+  .timeline-desc {
+    font-size: 16px; color: rgba(248, 245, 240, 0.7);
+    max-width: 700px; line-height: 1.7;
+  }
+  
+  /* COMPÉTENCES */
+  .skills-section { margin-bottom: 200px; }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .skill-block {
+    padding: 48px 40px;
+    background: rgba(248, 245, 240, 0.02);
+    border: 1px solid rgba(248, 245, 240, 0.08);
+    position: relative; transition: all 0.5s;
+  }
+  .skill-block:hover {
+    background: rgba(184, 68, 44, 0.05);
+    border-color: var(--rust);
+    transform: translateY(-8px);
+  }
+  .skill-block::before {
+    content: attr(data-number);
+    position: absolute; top: 20px; right: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--gold); opacity: 0.5;
+  }
+  .skill-icon {
+    width: 48px; height: 48px; margin-bottom: 32px; color: var(--gold);
+  }
+  .skill-title {
+    font-family: 'Fraunces', serif; font-size: 28px;
+    font-weight: 400; margin-bottom: 20px; letter-spacing: -0.01em;
+  }
+  .skill-list { list-style: none; color: rgba(248, 245, 240, 0.7); }
+  .skill-list li {
+    padding: 8px 0; padding-left: 20px;
+    position: relative; font-size: 14px;
+    border-bottom: 1px solid rgba(248, 245, 240, 0.05);
+  }
+  .skill-list li::before {
+    content: '→'; position: absolute; left: 0; color: var(--rust);
+  }
+  
+  /* OBJECTIONS */
+  .objections-section { margin-bottom: 200px; }
+  .objections-intro {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 300; line-height: 1.6;
+    color: rgba(248, 245, 240, 0.75);
+    max-width: 700px; margin-bottom: 80px; font-style: italic;
+  }
+  .objections-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .objection-card {
+    background: linear-gradient(180deg, rgba(184, 68, 44, 0.04), transparent);
+    border: 1px solid rgba(248, 245, 240, 0.08);
+    padding: 48px 40px;
+    position: relative; transition: all 0.5s; overflow: hidden;
+  }
+  .objection-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 0; background: var(--rust);
+    transition: height 0.6s ease;
+  }
+  .objection-card:hover::after { height: 100%; }
+  .objection-card:hover {
+    border-color: rgba(184, 68, 44, 0.3);
+    transform: translateY(-6px);
+  }
+  .objection-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .objection-question {
+    font-family: 'Fraunces', serif; font-size: 28px;
+    font-weight: 400; line-height: 1.2;
+    margin-bottom: 24px; color: var(--bone); font-style: italic;
+  }
+  .objection-divider {
+    width: 32px; height: 1px;
+    background: var(--rust); margin: 24px 0;
+  }
+  .objection-answer {
+    font-size: 15px; line-height: 1.7; color: rgba(248, 245, 240, 0.75);
+  }
+  .objection-answer strong { color: var(--gold); font-weight: 500; }
+  
+  /* CALCULATRICE */
+  .calc-section { margin-bottom: 200px; }
+  .calc-intro {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 300; line-height: 1.6;
+    color: rgba(248, 245, 240, 0.75);
+    max-width: 700px; margin-bottom: 64px; font-style: italic;
+  }
+  .calculator {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: rgba(248, 245, 240, 0.02);
+    border: 1px solid rgba(196, 165, 116, 0.2);
+    overflow: hidden;
+  }
+  .calc-inputs {
+    padding: 56px 48px;
+    border-right: 1px solid rgba(196, 165, 116, 0.15);
+  }
+  .calc-input-group { margin-bottom: 32px; }
+  .calc-input-group:last-child { margin-bottom: 0; }
+  .calc-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .calc-input-wrapper {
+    position: relative; display: flex; align-items: center;
+  }
+  .calc-input {
+    width: 100%; background: transparent; border: none;
+    border-bottom: 2px solid rgba(248, 245, 240, 0.15);
+    padding: 12px 0;
+    font-family: 'Fraunces', serif;
+    font-size: 32px; font-weight: 300; color: var(--bone);
+    outline: none; transition: border-color 0.3s;
+    -moz-appearance: textfield;
+  }
+  .calc-input::-webkit-outer-spin-button,
+  .calc-input::-webkit-inner-spin-button {
+    -webkit-appearance: none; margin: 0;
+  }
+  .calc-input:focus { border-bottom-color: var(--rust); }
+  .calc-unit {
+    font-family: 'Fraunces', serif; font-size: 24px;
+    color: var(--gold); margin-left: 16px; white-space: nowrap;
+  }
+  .calc-slider {
+    width: 100%; margin-top: 12px; accent-color: var(--rust);
+  }
+  .calc-results {
+    padding: 56px 48px; background: rgba(184, 68, 44, 0.03);
+  }
+  .calc-result-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+  }
+  .calc-result-main { margin-bottom: 32px; }
+  .calc-result-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.15em;
+    color: rgba(248, 245, 240, 0.6); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .calc-result-value {
+    font-family: 'Fraunces', serif; font-size: 64px;
+    font-weight: 300; line-height: 1;
+    color: var(--bone); letter-spacing: -0.02em;
+  }
+  .calc-result-value-accent { color: var(--rust); font-style: italic; }
+  .calc-result-unit {
+    font-size: 32px; color: var(--gold); margin-left: 8px;
+  }
+  .calc-result-secondary {
+    padding-top: 24px;
+    border-top: 1px solid rgba(196, 165, 116, 0.15);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  }
+  .calc-result-small {
+    font-family: 'Fraunces', serif; font-size: 24px;
+    font-weight: 300; color: rgba(248, 245, 240, 0.85); margin-top: 4px;
+  }
+  .calc-verdict {
+    margin-top: 32px; padding: 16px 20px;
+    border-left: 3px solid var(--rust);
+    background: rgba(184, 68, 44, 0.05);
+    font-family: 'Fraunces', serif; font-size: 16px;
+    font-style: italic; color: rgba(248, 245, 240, 0.85);
+  }
+  .calc-footer {
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em;
+    color: rgba(248, 245, 240, 0.4); text-transform: uppercase;
+  }
+  
+  /* CARTE */
+  .map-section { margin-bottom: 160px; }
+  .map-intro {
+    font-family: 'Fraunces', serif; font-size: 20px;
+    font-weight: 300; line-height: 1.6;
+    color: rgba(248, 245, 240, 0.75);
+    max-width: 700px; margin-bottom: 64px; font-style: italic;
+  }
+  .map-wrapper {
+    background: rgba(248, 245, 240, 0.02);
+    border: 1px solid rgba(196, 165, 116, 0.2);
+    padding: 56px;
+    display: grid; grid-template-columns: 1.5fr 1fr;
+    gap: 64px; align-items: center;
+  }
+  .map-svg { width: 100%; height: auto; }
+  .map-info-title {
+    font-family: 'Fraunces', serif; font-size: 40px;
+    font-weight: 400; line-height: 1.1;
+    margin-bottom: 24px; letter-spacing: -0.02em;
+  }
+  .map-info-title em { color: var(--gold); font-style: italic; }
+  .map-info-text {
+    font-size: 16px; line-height: 1.7;
+    color: rgba(248, 245, 240, 0.75); margin-bottom: 32px;
+  }
+  .map-cities {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 24px;
+  }
+  .map-city {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.7);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(248, 245, 240, 0.08);
+    display: flex; justify-content: space-between;
+  }
+  .map-city-distance { color: var(--gold); }
+  
+  /* CONTACT */
+  .contact-section {
+    text-align: center; padding: 80px 0;
+    border-top: 1px solid rgba(248, 245, 240, 0.1);
+  }
+  .contact-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 9vw, 144px);
+    font-weight: 300; line-height: 0.95;
+    letter-spacing: -0.03em; margin-bottom: 48px;
+  }
+  .contact-title em { font-style: italic; color: var(--rust); }
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; max-width: 900px; margin: 0 auto 80px;
+  }
+  .contact-card {
+    padding: 40px 32px;
+    border: 1px solid rgba(248, 245, 240, 0.1);
+    transition: all 0.4s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .contact-card:hover {
+    background: rgba(184, 68, 44, 0.05);
+    border-color: var(--rust);
+    transform: translateY(-4px);
+  }
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .contact-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 400;
+  }
+  .footer {
+    padding-top: 64px;
+    border-top: 1px solid rgba(248, 245, 240, 0.1);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.4);
+  }
+  .footer-name { color: var(--gold); }
+  
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .header-section { padding: 100px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
+    .hero-bio { font-size: 18px; }
+    .scroll-indicator { left: 24px; }
+    .dark-section { padding: 100px 24px 60px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 16px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 16px; }
+    .transition-board { padding: 20px 32px; font-size: 48px; }
+    .meta-row { grid-template-columns: 80px 1fr; gap: 16px; }
+    .objections-grid { grid-template-columns: 1fr; }
+    .calculator { grid-template-columns: 1fr; }
+    .calc-inputs { border-right: none; border-bottom: 1px solid rgba(196, 165, 116, 0.15); padding: 40px 24px; }
+    .calc-results { padding: 40px 24px; }
+    .calc-result-value { font-size: 48px; }
+    .map-wrapper { grid-template-columns: 1fr; gap: 40px; padding: 32px 24px; }
+    .map-info-title { font-size: 32px; }
+    .map-cities { grid-template-columns: 1fr; }
+    .parallax-sun { width: 80px; height: 80px; right: 12%; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">BJ — 2026</div>
+  <div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#competences">Compétences</a>
+    <a href="#objections">Pourquoi moi</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="header-section">
+  <div class="editorial-tag">Portfolio · Édition 2026 · N°001</div>
+  
+  <h1 class="hero-title">
+    Benjamin<br>Joubert<em>.</em>
+  </h1>
+  
+  <div class="hero-grid">
+    <div class="hero-bio">
+      <p>
+        En recherche d'<strong>alternance BTS Professions Immobilières</strong>
+        pour la rentrée 2026. Un profil <strong>hybride digital et commercial</strong>
+        que vous croisez rarement dans une candidature pour ce secteur.
+        Deux ans de développement web, cinq mois en conseil commercial, et un projet
+        professionnel clair : apprendre l'immobilier à vos côtés.
+      </p>
+    </div>
+    
+    <div class="hero-meta">
+      <div class="meta-row">
+        <span class="meta-label">Âge</span>
+        <span class="meta-value">23 ans</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Basé à</span>
+        <span class="meta-value">Le Mans, Sarthe</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Permis</span>
+        <span class="meta-value">B · Véhicule personnel</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Formation</span>
+        <span class="meta-value">BTS PI · ESPL Angers · Sept. 2026</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Statut</span>
+        <span class="meta-value">Disponible immédiatement pour échange</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator">Défiler · Le voyage commence</div>
+</section>
+
+<section class="parallax-section" id="parallax">
+  <div class="parallax-stage">
+    <div class="parallax-sky"></div>
+    <div class="parallax-sun" id="parallaxSun"></div>
+    <div class="parallax-clouds" id="parallaxClouds"></div>
+    <div class="building-layer layer-far" id="layerFar"></div>
+    <div class="building-layer layer-mid" id="layerMid"></div>
+    <div class="building-layer layer-near" id="layerNear"></div>
+    
+    <div class="parallax-title" id="parallaxTitle">
+      <div class="parallax-eyebrow">Pourquoi l'immobilier ?</div>
+      <h2 class="parallax-heading">
+        Parce qu'un bien immobilier,<br>
+        c'est avant tout <em>une histoire</em>,<br>
+        un projet, une décision <em>de vie</em>.
+      </h2>
+    </div>
+    
+    <div class="transition-sign" id="transitionSign">
+      <div class="transition-board">VENDU</div>
+      <div class="transition-sub">Au candidat suivant</div>
+    </div>
+    
+    <div class="ground"></div>
+  </div>
+</section>
+
+<section class="dark-section">
+  <div class="container">
+    
+    <div id="about">
+      <div class="section-tag">01 — À propos</div>
+      <h2 class="section-title">
+        Le profil que vous<br><em>n'attendiez pas</em>.
+      </h2>
+      
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Je sais ce que vous lisez d'habitude. Des candidats qui veulent
+            <strong>"évoluer dans l'humain"</strong> et qui <strong>"adorent le contact client"</strong>.
+            Moi je viens vous proposer quelque chose de différent.
+          </p>
+          <p>
+            J'ai passé deux ans à développer des sites web en alternance chez Voxymore,
+            et cinq mois en conseil commercial au SAV Citroën. Concrètement, je sais
+            <strong>gérer des clients exigeants dans la durée</strong>, livrer des projets
+            dans les délais, et travailler avec les outils numériques en agence.
+          </p>
+          <p>
+            Mon objectif sur les deux ans d'alternance : maîtriser totalement le métier
+            d'agent immobilier, et combiner cette expertise avec mes compétences
+            techniques pour devenir <strong>réellement utile à votre agence</strong>.
+          </p>
+        </div>
+        
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">02<span class="stat-number-small">ans</span></div>
+            <div class="stat-label">Alternance<br>développement web<br>Voxymore</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">05<span class="stat-number-small">mois</span></div>
+            <div class="stat-label">Conseil<br>commercial<br>Citroën GEMY</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">25<span class="stat-number-small">km</span></div>
+            <div class="stat-label">Zone de mobilité<br>autour du Mans<br>véhicule perso</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">09<span class="stat-number-small">/26</span></div>
+            <div class="stat-label">Démarrage<br>alternance<br>BTS PI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="timeline" id="parcours">
+      <div class="section-tag">02 — Parcours</div>
+      <h2 class="section-title">
+        Trois étapes,<br><em>une direction</em>.
+      </h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">2023 — 2025</div>
+        <div>
+          <div class="timeline-title">Développeur Web</div>
+          <div class="timeline-company">Voxymore · Le Mans · Alternance BTS</div>
+          <div class="timeline-desc">
+            Développement de projets web à partir de cahiers des charges clients.
+            Analyse des besoins, adaptation des solutions, organisation du travail
+            selon les délais imposés. Communication continue avec les clients tout
+            au long des projets, jusqu'à la livraison.
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">2021 — 2022</div>
+        <div>
+          <div class="timeline-title">Conseiller Commercial</div>
+          <div class="timeline-company">Citroën GEMY · Le Mans · Alternance · 5 mois</div>
+          <div class="timeline-desc">
+            Accueil clients pour demandes de réparation et diagnostic. Identification
+            des problématiques, reformulation des besoins, explication des interventions.
+            Coordination avec les équipes techniques. Gestion des échanges clients,
+            suivi après intervention.
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">2022 — 2023</div>
+        <div>
+          <div class="timeline-title">Expériences diverses</div>
+          <div class="timeline-company">Intérim · CDD · Sarthe</div>
+          <div class="timeline-desc">
+            Adaptation rapide dans différents environnements professionnels.
+            Travail en équipe dans des contextes à forte activité. Gestion du
+            rythme et respect des délais. Une capacité à m'intégrer vite et à
+            performer dès les premières semaines.
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">Sept. 2026 →</div>
+        <div>
+          <div class="timeline-title">BTS Professions Immobilières</div>
+          <div class="timeline-company">ESPL Angers · Alternance Le Mans</div>
+          <div class="timeline-desc">
+            Formation initiale aux métiers de la transaction, de la gestion locative
+            et du syndic de copropriété. Objectif : devenir négociateur confirmé,
+            puis évoluer à terme vers la gestion d'une agence ou un parcours
+            d'investisseur. La prochaine étape de ma trajectoire.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="skills-section" id="competences">
+      <div class="section-tag">03 — Compétences</div>
+      <h2 class="section-title">
+        Ce que je peux<br><em>apporter dès le jour 1</em>.
+      </h2>
+      
+      <div class="skills-grid">
+        <div class="skill-block" data-number="A.">
+          <svg class="skill-icon" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4L4 14V34L24 44L44 34V14L24 4Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M4 14L24 24L44 14M24 24V44" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="skill-title">Relation Client</div>
+          <ul class="skill-list">
+            <li>Accueil et qualification des besoins</li>
+            <li>Gestion des clients exigeants</li>
+            <li>Suivi long-terme et fidélisation</li>
+            <li>Communication multicanal</li>
+            <li>Reformulation et négociation</li>
+          </ul>
+        </div>
+        
+        <div class="skill-block" data-number="B.">
+          <svg class="skill-icon" viewBox="0 0 48 48" fill="none">
+            <rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 18H42M14 26H22M14 32H30" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="skill-title">Outils Digitaux</div>
+          <ul class="skill-list">
+            <li>Création de sites et landing pages</li>
+            <li>Photographie de biens</li>
+            <li>Gestion CRM et automatisation</li>
+            <li>Réseaux sociaux et SEO</li>
+            <li>Suite Office et collaboratifs</li>
+          </ul>
+        </div>
+        
+        <div class="skill-block" data-number="C.">
+          <svg class="skill-icon" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4V24L34 30" stroke="currentColor" stroke-width="2"/>
+            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="skill-title">Organisation</div>
+          <ul class="skill-list">
+            <li>Gestion de plusieurs dossiers en parallèle</li>
+            <li>Respect des délais et priorités</li>
+            <li>Coordination avec interlocuteurs multiples</li>
+            <li>Autonomie sur les tâches confiées</li>
+            <li>Adaptation rapide aux nouveaux outils</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="objections-section" id="objections">
+      <div class="section-tag">04 — Pourquoi moi</div>
+      <h2 class="section-title">
+        Trois doutes,<br><em>trois réponses</em>.
+      </h2>
+      
+      <p class="objections-intro">
+        Avant de me rencontrer, vous avez probablement quelques questions en tête.
+        Voici les réponses, sans détour.
+      </p>
+      
+      <div class="objections-grid">
+        <div class="objection-card">
+          <div class="objection-number">Doute n°01</div>
+          <h3 class="objection-question">"Sera-t-il vraiment autonome ?"</h3>
+          <div class="objection-divider"></div>
+          <p class="objection-answer">
+            J'ai déjà <strong>trois années d'alternance</strong> derrière moi,
+            sur deux entreprises différentes. Je sais m'organiser, prioriser,
+            et livrer dans les délais sans qu'on me tienne la main. L'autonomie
+            n'est pas un objectif pour moi, c'est ma manière de fonctionner
+            depuis le premier jour.
+          </p>
+        </div>
+        
+        <div class="objection-card">
+          <div class="objection-number">Doute n°02</div>
+          <h3 class="objection-question">"Combien ça va vraiment coûter ?"</h3>
+          <div class="objection-divider"></div>
+          <p class="objection-answer">
+            L'alternance est <strong>largement financée par l'OPCO</strong> (jusqu'à 100%
+            pour la formation, plus aides à l'embauche). Le coût net pour vous
+            est minime, et plus que compensé par le temps que je libère sur
+            les tâches que vous me confiez dès les premiers mois.
+          </p>
+        </div>
+        
+        <div class="objection-card">
+          <div class="objection-number">Doute n°03</div>
+          <h3 class="objection-question">"Quand sera-t-il vraiment utile ?"</h3>
+          <div class="objection-divider"></div>
+          <p class="objection-answer">
+            <strong>Dès le premier mois</strong>, je peux gérer la prospection
+            téléphonique, mettre à jour vos annonces en ligne, accompagner les
+            visites. À six mois, j'aurai mes premiers mandats. À douze mois,
+            je serai un négociateur fonctionnel. La courbe de valeur démarre
+            tout de suite.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="calc-section" id="calculator">
+      <div class="section-tag">05 — Démonstration technique</div>
+      <h2 class="section-title">
+        Un outil construit<br><em>en direct, ici</em>.
+      </h2>
+      
+      <p class="calc-intro">
+        Une calculatrice de rentabilité locative interactive. Codée à la main pour ce portfolio.
+        Aucun candidat alternant BTS PI n'arrive avec ce genre d'outil dans sa candidature.
+        Vous pouvez la tester ci-dessous.
+      </p>
+      
+      <div class="calculator">
+        <div class="calc-inputs">
+          <div class="calc-input-group">
+            <label class="calc-label">Prix d'achat du bien</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcPrice" value="180000" min="0">
+              <span class="calc-unit">€</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcPriceSlider" min="50000" max="800000" step="5000" value="180000">
+          </div>
+          
+          <div class="calc-input-group">
+            <label class="calc-label">Loyer mensuel hors charges</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcRent" value="750" min="0">
+              <span class="calc-unit">€/mois</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcRentSlider" min="200" max="3000" step="25" value="750">
+          </div>
+          
+          <div class="calc-input-group">
+            <label class="calc-label">Charges et taxes annuelles</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcCharges" value="1500" min="0">
+              <span class="calc-unit">€/an</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcChargesSlider" min="0" max="10000" step="100" value="1500">
+          </div>
+        </div>
+        
+        <div class="calc-results">
+          <div class="calc-result-title">→ Résultat en temps réel</div>
+          
+          <div class="calc-result-main">
+            <div class="calc-result-label">Rentabilité brute</div>
+            <div class="calc-result-value">
+              <span id="calcBrute" class="calc-result-value-accent">5,00</span><span class="calc-result-unit">%</span>
+            </div>
+          </div>
+          
+          <div class="calc-result-secondary">
+            <div>
+              <div class="calc-result-label">Rentabilité nette</div>
+              <div class="calc-result-small"><span id="calcNette">4,17</span>%</div>
+            </div>
+            <div>
+              <div class="calc-result-label">Cashflow / mois</div>
+              <div class="calc-result-small"><span id="calcCashflow">625</span>€</div>
+            </div>
+          </div>
+          
+          <div class="calc-verdict" id="calcVerdict">
+            Rendement correct pour de la pierre patrimoniale en zone tendue.
+          </div>
+          
+          <div class="calc-footer">→ Calcul à titre indicatif</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="map-section">
+      <div class="section-tag">06 — Mobilité</div>
+      <h2 class="section-title">
+        Ma zone d'action,<br><em>à vue de carte</em>.
+      </h2>
+      
+      <p class="map-intro">
+        Le Mans et 25 kilomètres alentour. Toutes les communes accessibles
+        en moins de 30 minutes, véhicule personnel. Aucun trajet logistique
+        à arbitrer, aucun retard à craindre.
+      </p>
+      
+      <div class="map-wrapper">
+        <svg class="map-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(196, 165, 116, 0.06)" stroke-width="0.5"/>
+            </pattern>
+            <radialGradient id="zoneGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(184, 68, 44, 0.15)"/>
+              <stop offset="70%" stop-color="rgba(184, 68, 44, 0.05)"/>
+              <stop offset="100%" stop-color="rgba(184, 68, 44, 0)"/>
+            </radialGradient>
+          </defs>
+          
+          <rect width="500" height="500" fill="url(#grid)"/>
+          
+          <circle cx="250" cy="250" r="200" fill="url(#zoneGrad)" stroke="#B8442C" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.7"/>
+          <circle cx="250" cy="250" r="100" fill="none" stroke="rgba(196, 165, 116, 0.3)" stroke-width="0.8" stroke-dasharray="2,3"/>
+          
+          <text x="358" y="246" font-family="JetBrains Mono, monospace" font-size="9" fill="#C4A574" letter-spacing="1">12 km</text>
+          <text x="456" y="246" font-family="JetBrains Mono, monospace" font-size="9" fill="#B8442C" letter-spacing="1">25 km</text>
+          
+          <path d="M 50 250 L 450 250" stroke="rgba(196, 165, 116, 0.15)" stroke-width="2"/>
+          <path d="M 250 50 L 250 450" stroke="rgba(196, 165, 116, 0.15)" stroke-width="2"/>
+          <path d="M 100 100 L 400 400" stroke="rgba(196, 165, 116, 0.1)" stroke-width="1.5"/>
+          <path d="M 100 400 L 400 100" stroke="rgba(196, 165, 116, 0.1)" stroke-width="1.5"/>
+          
+          <circle cx="250" cy="250" r="10" fill="#B8442C"/>
+          <circle cx="250" cy="250" r="16" fill="none" stroke="#B8442C" stroke-width="1" opacity="0.5">
+            <animate attributeName="r" values="10;24;10" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0;0.7" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <text x="250" y="240" text-anchor="middle" font-family="Fraunces, serif" font-size="18" font-weight="500" fill="#F8F5F0">LE MANS</text>
+          <text x="250" y="278" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574" letter-spacing="2">BASE</text>
+          
+          <circle cx="270" cy="190" r="5" fill="#C4A574"/>
+          <text x="280" y="190" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Coulaines</text>
+          <text x="280" y="203" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">4 km</text>
+          
+          <circle cx="180" cy="170" r="5" fill="#C4A574"/>
+          <text x="92" y="170" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Saint-Saturnin</text>
+          <text x="92" y="183" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">8 km</text>
+          
+          <circle cx="240" cy="330" r="5" fill="#C4A574"/>
+          <text x="250" y="332" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Arnage</text>
+          <text x="250" y="345" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">7 km</text>
+          
+          <circle cx="170" cy="280" r="5" fill="#C4A574"/>
+          <text x="105" y="282" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Allonnes</text>
+          <text x="105" y="295" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">6 km</text>
+          
+          <circle cx="320" cy="320" r="5" fill="#C4A574"/>
+          <text x="330" y="322" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Ruaudin</text>
+          <text x="330" y="335" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">10 km</text>
+          
+          <circle cx="340" cy="240" r="5" fill="#C4A574"/>
+          <text x="350" y="243" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Yvré-l'Évêque</text>
+          <text x="350" y="256" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">7 km</text>
+          
+          <circle cx="130" cy="370" r="5" fill="#C4A574"/>
+          <text x="20" y="372" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">La Suze-sur-Sarthe</text>
+          <text x="20" y="385" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">18 km</text>
+          
+          <circle cx="380" cy="120" r="5" fill="#C4A574"/>
+          <text x="300" y="120" font-family="Manrope, sans-serif" font-size="11" fill="#F8F5F0">Bonnétable</text>
+          <text x="300" y="133" font-family="JetBrains Mono, monospace" font-size="8" fill="#C4A574">22 km</text>
+          
+          <g transform="translate(440,60)">
+            <circle cx="0" cy="0" r="20" fill="rgba(0,0,0,0.4)" stroke="rgba(196,165,116,0.3)" stroke-width="0.5"/>
+            <path d="M 0 -12 L 4 4 L 0 0 L -4 4 Z" fill="#B8442C"/>
+            <text x="0" y="-3" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#F8F5F0" font-weight="bold">N</text>
+          </g>
+        </svg>
+        
+        <div>
+          <h3 class="map-info-title">
+            Toute la métropole<br>
+            <em>en moins de 30 min</em>.
+          </h3>
+          <p class="map-info-text">
+            Le centre du Mans est mon point de départ, mais ma zone de prospection 
+            réelle s'étend bien au-delà. J'ai déjà couvert toutes les communes 
+            ci-contre dans le cadre de ma recherche d'alternance.
+          </p>
+          
+          <div class="map-cities">
+            <div class="map-city"><span>Coulaines</span><span class="map-city-distance">4 km</span></div>
+            <div class="map-city"><span>Arnage</span><span class="map-city-distance">7 km</span></div>
+            <div class="map-city"><span>Allonnes</span><span class="map-city-distance">6 km</span></div>
+            <div class="map-city"><span>Yvré</span><span class="map-city-distance">7 km</span></div>
+            <div class="map-city"><span>Saint-Saturnin</span><span class="map-city-distance">8 km</span></div>
+            <div class="map-city"><span>Ruaudin</span><span class="map-city-distance">10 km</span></div>
+            <div class="map-city"><span>La Suze</span><span class="map-city-distance">18 km</span></div>
+            <div class="map-city"><span>Bonnétable</span><span class="map-city-distance">22 km</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="contact-section" id="contact">
+      <h2 class="contact-title">
+        On se voit<br><em>en agence ?</em>
+      </h2>
+      
+      <div class="contact-grid">
+        <a href="tel:+33787666649" class="contact-card">
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value">07 87 66 66 49</div>
+        </a>
+        <a href="mailto:benjamin.joubert6@gmail.com" class="contact-card">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">benjamin.joubert6@gmail.com</div>
+        </a>
+        <div class="contact-card" style="cursor:default">
+          <div class="contact-label">Localisation</div>
+          <div class="contact-value">Le Mans · 72100</div>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <span class="footer-name">Benjamin Joubert</span> · Portfolio 2026 · Construit à la main, sans template
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+const colorsFar = { building: '#8B7B68', window: '#B8A48D', roof: '#6B5C4A' };
+const colorsMid = { building: '#4A3F33', window: '#C4A574', roof: '#3A2F25' };
+const colorsNear = { building: '#2A2520', window: '#E8C896', roof: '#1A1612' };
+
+const buildingTypes = [
+  (color, height = 280, width = 100) => `
+    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <rect x="5" y="20" width="${width-10}" height="${height-20}" fill="${color.building}"/>
+      <polygon points="0,20 ${width},20 ${width/2},0" fill="${color.roof}"/>
+      ${Array.from({length: 5}, (_, row) => 
+        Array.from({length: 3}, (_, col) => 
+          `<rect x="${15 + col * (width-30)/2.5}" y="${40 + row * 45}" width="14" height="22" fill="${color.window}"/>`
+        ).join('')
+      ).join('')}
+      <rect x="${width/2 - 12}" y="${height-30}" width="24" height="30" fill="${color.roof}"/>
+    </svg>
+  `,
+  (color, height = 200, width = 80) => `
+    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <rect x="0" y="15" width="${width}" height="${height-15}" fill="${color.building}"/>
+      <rect x="0" y="0" width="${width}" height="20" fill="${color.roof}"/>
+      ${Array.from({length: 3}, (_, row) => 
+        Array.from({length: 2}, (_, col) => 
+          `<rect x="${12 + col * 35}" y="${30 + row * 50}" width="20" height="28" fill="${color.window}"/>`
+        ).join('')
+      ).join('')}
+      <rect x="${width/2 - 10}" y="${height-25}" width="20" height="25" fill="${color.roof}"/>
+    </svg>
+  `,
+  (color, height = 140, width = 130) => `
+    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <polygon points="0,60 ${width/2},10 ${width},60" fill="${color.roof}"/>
+      <rect x="10" y="60" width="${width-20}" height="${height-60}" fill="${color.building}"/>
+      <rect x="25" y="75" width="22" height="22" fill="${color.window}"/>
+      <rect x="${width-47}" y="75" width="22" height="22" fill="${color.window}"/>
+      <rect x="${width/2 - 12}" y="${height-40}" width="24" height="40" fill="${color.roof}"/>
+    </svg>
+  `,
+  (color, height = 340, width = 75) => `
+    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <rect x="0" y="0" width="${width}" height="${height}" fill="${color.building}"/>
+      ${Array.from({length: 10}, (_, row) => 
+        Array.from({length: 2}, (_, col) => 
+          `<rect x="${10 + col * 30}" y="${15 + row * 30}" width="22" height="18" fill="${color.window}"/>`
+        ).join('')
+      ).join('')}
+    </svg>
+  `,
+  (color, height = 220, width = 160) => `
+    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <rect x="0" y="10" width="${width}" height="${height-10}" fill="${color.building}"/>
+      <rect x="0" y="0" width="${width}" height="14" fill="${color.roof}"/>
+      ${Array.from({length: 4}, (_, row) => 
+        Array.from({length: 5}, (_, col) => 
+          `<rect x="${10 + col * 30}" y="${25 + row * 45}" width="18" height="25" fill="${color.window}"/>`
+        ).join('')
+      ).join('')}
+    </svg>
+  `,
+];
+
+function generateLayer(layerId, color, count, signFrequency = 0.4) {
+  const layer = document.getElementById(layerId);
+  let html = '';
+  
+  for (let i = 0; i < count; i++) {
+    const typeIdx = Math.floor(Math.random() * buildingTypes.length);
+    const buildingSvg = buildingTypes[typeIdx](color);
+    
+    let signHtml = '';
+    if (Math.random() < signFrequency) {
+      const signs = [
+        { text: 'À VENDRE', class: '' },
+        { text: 'À LOUER', class: '' },
+        { text: 'VENDU', class: 'sign-vendu' },
+        { text: 'NOUVEAU', class: '' },
+        { text: 'COUP DE CŒUR', class: '' },
+      ];
+      const sign = signs[Math.floor(Math.random() * signs.length)];
+      signHtml = `
+        <div class="sign ${sign.class}" style="bottom: -55px; left: 50%; transform: translateX(-50%) rotate(${Math.random() * 8 - 4}deg);">
+          <div class="sign-stick"></div>
+          <div class="sign-board">${sign.text}</div>
+        </div>
+      `;
+    }
+    
+    html += `<div class="building" style="margin-right: ${15 + Math.random() * 35}px; position: relative;">${buildingSvg}${signHtml}</div>`;
+  }
+  
+  layer.innerHTML = html;
+}
+
+function generateClouds() {
+  const cloudsContainer = document.getElementById('parallaxClouds');
+  let html = '';
+  for (let i = 0; i < 8; i++) {
+    const top = Math.random() * 60;
+    const left = Math.random() * 90;
+    const width = 80 + Math.random() * 120;
+    const height = 25 + Math.random() * 25;
+    const opacity = 0.4 + Math.random() * 0.4;
+    html += `<div class="cloud" style="top:${top}%;left:${left}%;width:${width}px;height:${height}px;opacity:${opacity};"></div>`;
+  }
+  cloudsContainer.innerHTML = html;
+}
+
+generateLayer('layerFar', colorsFar, 35, 0.15);
+generateLayer('layerMid', colorsMid, 25, 0.5);
+generateLayer('layerNear', colorsNear, 18, 0.7);
+generateClouds();
+
+const parallaxSection = document.querySelector('.parallax-section');
+const layerFar = document.getElementById('layerFar');
+const layerMid = document.getElementById('layerMid');
+const layerNear = document.getElementById('layerNear');
+const transitionSign = document.getElementById('transitionSign');
+const parallaxTitle = document.getElementById('parallaxTitle');
+const parallaxSun = document.getElementById('parallaxSun');
+const parallaxClouds = document.getElementById('parallaxClouds');
+
+let rafId = null;
+
+function updateParallax() {
+  const rect = parallaxSection.getBoundingClientRect();
+  const sectionHeight = parallaxSection.offsetHeight;
+  const windowHeight = window.innerHeight;
+  
+  const progress = Math.max(0, Math.min(1, -rect.top / (sectionHeight - windowHeight)));
+  
+  layerFar.style.transform = `translateX(${-progress * 800}px)`;
+  layerMid.style.transform = `translateX(${-progress * 1500}px)`;
+  layerNear.style.transform = `translateX(${-progress * 2500}px)`;
+  
+  parallaxClouds.style.transform = `translateX(${-progress * 400}px)`;
+  
+  const sunY = progress * 500;
+  const sunScale = 1 + progress * 0.5;
+  parallaxSun.style.transform = `translate(${progress * -80}px, ${sunY}px) scale(${sunScale})`;
+  parallaxSun.style.opacity = progress > 0.85 ? Math.max(0, 1 - (progress - 0.85) * 6) : 1;
+  
+  if (progress > 0.55) {
+    parallaxTitle.classList.add('dark-mode');
+  } else {
+    parallaxTitle.classList.remove('dark-mode');
+  }
+  
+  if (progress > 0.5) {
+    const fadeOut = Math.max(0, 1 - (progress - 0.5) * 4);
+    parallaxTitle.style.opacity = fadeOut;
+  } else {
+    parallaxTitle.style.opacity = 1;
+  }
+  
+  if (progress > 0.65) {
+    transitionSign.classList.add('visible');
+  } else {
+    transitionSign.classList.remove('visible');
+  }
+  
+  rafId = null;
+}
+
+window.addEventListener('scroll', () => {
+  if (!rafId) {
+    rafId = requestAnimationFrame(updateParallax);
+  }
+}, { passive: true });
+
+updateParallax();
+
+function updateCalc() {
+  const price = parseFloat(document.getElementById('calcPrice').value) || 0;
+  const rent = parseFloat(document.getElementById('calcRent').value) || 0;
+  const charges = parseFloat(document.getElementById('calcCharges').value) || 0;
+  
+  const yearlyRent = rent * 12;
+  
+  const bruteRate = price > 0 ? (yearlyRent / price) * 100 : 0;
+  const netteRate = price > 0 ? ((yearlyRent - charges) / price) * 100 : 0;
+  const cashflowMonth = (yearlyRent - charges) / 12;
+  
+  document.getElementById('calcBrute').textContent = bruteRate.toFixed(2).replace('.', ',');
+  document.getElementById('calcNette').textContent = netteRate.toFixed(2).replace('.', ',');
+  document.getElementById('calcCashflow').textContent = Math.round(cashflowMonth).toLocaleString('fr-FR');
+  
+  const verdict = document.getElementById('calcVerdict');
+  if (bruteRate < 3) {
+    verdict.textContent = "Rendement faible. Probablement un bien patrimonial en zone très tendue, à étudier autrement.";
+  } else if (bruteRate < 5) {
+    verdict.textContent = "Rendement correct pour de la pierre patrimoniale en zone tendue type centre Le Mans.";
+  } else if (bruteRate < 7) {
+    verdict.textContent = "Bon rendement. Profil équilibré entre rentabilité et qualité du bien.";
+  } else if (bruteRate < 10) {
+    verdict.textContent = "Excellent rendement. À surveiller : risque locatif, état du bien, qualité du secteur.";
+  } else {
+    verdict.textContent = "Rendement très élevé. Forte vigilance requise : vacance, dégradation, secteur difficile.";
+  }
+}
+
+['Price', 'Rent', 'Charges'].forEach(field => {
+  const input = document.getElementById(`calc${field}`);
+  const slider = document.getElementById(`calc${field}Slider`);
+  
+  input.addEventListener('input', () => {
+    slider.value = input.value;
+    updateCalc();
+  });
+  
+  slider.addEventListener('input', () => {
+    input.value = slider.value;
+    updateCalc();
+  });
+});
+
+updateCalc();
+
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -10% 0px' };
+
+const fadeInElements = document.querySelectorAll('.timeline-item, .skill-block, .objection-card, .stat-card');
+fadeInElements.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(40px)';
+  el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+});
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, idx) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }, idx * 80);
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+fadeInElements.forEach(el => fadeObserver.observe(el));
+</script>
+
+</body>
+</html>
