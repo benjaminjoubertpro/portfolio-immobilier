@@ -120,12 +120,19 @@
   
   /* PARALLAXE */
   .parallax-section {
-    height: 350vh; position: relative; overflow: hidden;
+    height: 200vh; position: relative; overflow: hidden;
+    background: var(--black);
+    z-index: 1;
   }
   .parallax-stage {
     position: sticky; top: 0;
     height: 100vh; width: 100%;
-    overflow: hidden; background: var(--cream);
+    overflow: hidden;
+    background: var(--cream);
+    transition: background-color 0.6s ease;
+  }
+  .parallax-stage.dark-phase {
+    background: var(--black);
   }
   .parallax-sky {
     position: absolute; inset: 0;
@@ -153,43 +160,23 @@
     border-radius: 100px; filter: blur(2px);
   }
   .building-layer {
-    position: absolute; bottom: 80px;
+    position: absolute;
     width: 250%; height: 100%;
     will-change: transform;
     display: flex; align-items: flex-end;
   }
-  .layer-far { z-index: 3; opacity: 0.55; bottom: 70px; }
-  .layer-mid { z-index: 4; opacity: 0.85; }
-  .layer-near { z-index: 5; }
+  .layer-far { z-index: 3; opacity: 0.55; bottom: 90px; }
+  .layer-mid { z-index: 4; opacity: 0.85; bottom: 75px; }
+  .layer-near { z-index: 5; bottom: 60px; }
   .building {
-    position: relative; flex-shrink: 0; margin-right: 20px;
-  }
-  .sign {
-    position: absolute;
-    font-family: 'Fraunces', serif; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.08em;
-    transform-origin: top center;
-    z-index: 10; pointer-events: none;
-  }
-  .sign-board {
-    padding: 8px 18px; border: 2px solid currentColor;
-    background: var(--cream); color: var(--ink);
-    box-shadow: 4px 4px 0 var(--ink);
-    font-size: 13px; white-space: nowrap;
-  }
-  .sign-vendu .sign-board {
-    background: var(--rust); color: var(--cream);
-    border-color: var(--rust-deep);
-    box-shadow: 4px 4px 0 var(--rust-deep);
-  }
-  .sign-stick {
-    width: 3px; height: 30px;
-    background: var(--ink); margin: 0 auto;
+    flex-shrink: 0;
+    line-height: 0;
   }
   .ground {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 80px;
-    background: linear-gradient(180deg, transparent, var(--ink));
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 140px;
+    background: linear-gradient(180deg, transparent 0%, rgba(10, 9, 8, 0.3) 30%, var(--black) 80%);
     z-index: 6;
   }
   .parallax-title {
@@ -246,6 +233,8 @@
   .dark-section {
     background: var(--black); color: var(--bone);
     padding: 160px 64px 80px; position: relative;
+    margin-top: -100vh;
+    z-index: 2;
   }
   .dark-section::before {
     content: ''; position: absolute; inset: 0;
@@ -452,6 +441,32 @@
     padding: 56px 48px;
     border-right: 1px solid rgba(196, 165, 116, 0.15);
   }
+  .calc-presets {
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(196, 165, 116, 0.1);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .calc-presets-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.5);
+    width: 100%; margin-bottom: 8px;
+  }
+  .calc-preset {
+    background: transparent;
+    border: 1px solid rgba(196, 165, 116, 0.3);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    padding: 8px 14px;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .calc-preset:hover {
+    background: rgba(184, 68, 44, 0.1);
+    border-color: var(--rust);
+    color: var(--bone);
+  }
   .calc-input-group { margin-bottom: 32px; }
   .calc-input-group:last-child { margin-bottom: 0; }
   .calc-label {
@@ -619,28 +634,86 @@
   
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    .nav { padding: 16px 24px; }
+    .nav { padding: 14px 20px; }
     .nav-links { display: none; }
-    .header-section { padding: 100px 24px 60px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
-    .hero-bio { font-size: 18px; }
-    .scroll-indicator { left: 24px; }
-    .dark-section { padding: 100px 24px 60px; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .timeline-item { grid-template-columns: 1fr; gap: 16px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 16px; }
-    .transition-board { padding: 20px 32px; font-size: 48px; }
-    .meta-row { grid-template-columns: 80px 1fr; gap: 16px; }
-    .objections-grid { grid-template-columns: 1fr; }
+    .nav-logo { font-size: 11px; }
+    
+    .header-section { padding: 90px 20px 60px; }
+    .hero-title { font-size: clamp(48px, 13vw, 80px); margin-bottom: 32px; }
+    .editorial-tag { font-size: 10px; margin-bottom: 24px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
+    .hero-bio { font-size: 17px; }
+    .meta-row { grid-template-columns: 80px 1fr; gap: 12px; padding-bottom: 12px; }
+    .meta-value { font-size: 13px; }
+    .scroll-indicator { left: 20px; bottom: 24px; font-size: 9px; }
+    
+    .parallax-section { height: 180vh; }
+    .parallax-sun { width: 70px; height: 70px; right: 10%; top: 10%; }
+    .parallax-heading { font-size: clamp(28px, 7vw, 42px); }
+    .parallax-eyebrow { font-size: 10px; margin-bottom: 16px; }
+    .transition-board { padding: 18px 32px; font-size: clamp(40px, 12vw, 64px); box-shadow: 6px 6px 0 var(--black), 0 20px 40px rgba(0,0,0,0.5); }
+    .transition-sub { font-size: 10px; padding: 8px 16px; margin-top: 16px; }
+    .ground { height: 100px; }
+    
+    .dark-section { padding: 100px 20px 60px; }
+    .section-title { font-size: clamp(36px, 9vw, 56px); margin-bottom: 56px; }
+    .section-tag { font-size: 10px; margin-bottom: 24px; }
+    
+    .about-grid { grid-template-columns: 1fr; gap: 40px; margin-bottom: 120px; }
+    .about-text p { font-size: 17px; }
+    .about-stats { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-card { padding: 24px 20px; }
+    .stat-number { font-size: 44px; }
+    .stat-number-small { font-size: 18px; }
+    
+    .timeline { margin-bottom: 120px; }
+    .timeline-item { grid-template-columns: 1fr; gap: 12px; padding: 32px 0; }
+    .timeline-item:hover { padding-left: 0; }
+    .timeline-title { font-size: 24px; }
+    .timeline-desc { font-size: 15px; }
+    
+    .skills-section { margin-bottom: 120px; }
+    .skills-grid { grid-template-columns: 1fr; gap: 20px; }
+    .skill-block { padding: 32px 28px; }
+    .skill-title { font-size: 24px; }
+    
+    .objections-section { margin-bottom: 120px; }
+    .objections-grid { grid-template-columns: 1fr; gap: 16px; }
+    .objection-card { padding: 32px 28px; }
+    .objection-question { font-size: 22px; }
+    .objections-intro { font-size: 17px; margin-bottom: 48px; }
+    
+    .calc-section { margin-bottom: 120px; }
+    .calc-intro { font-size: 17px; margin-bottom: 40px; }
     .calculator { grid-template-columns: 1fr; }
-    .calc-inputs { border-right: none; border-bottom: 1px solid rgba(196, 165, 116, 0.15); padding: 40px 24px; }
-    .calc-results { padding: 40px 24px; }
+    .calc-inputs { border-right: none; border-bottom: 1px solid rgba(196, 165, 116, 0.15); padding: 32px 24px; }
+    .calc-results { padding: 32px 24px; }
     .calc-result-value { font-size: 48px; }
-    .map-wrapper { grid-template-columns: 1fr; gap: 40px; padding: 32px 24px; }
-    .map-info-title { font-size: 32px; }
+    .calc-result-unit { font-size: 24px; }
+    .calc-input { font-size: 24px; }
+    .calc-unit { font-size: 18px; }
+    .calc-preset { font-size: 10px; padding: 6px 12px; }
+    
+    .map-section { margin-bottom: 100px; }
+    .map-intro { font-size: 17px; margin-bottom: 40px; }
+    .map-wrapper { grid-template-columns: 1fr; gap: 32px; padding: 24px 20px; }
+    .map-info-title { font-size: 28px; }
+    .map-info-text { font-size: 15px; }
+    .map-cities { grid-template-columns: 1fr 1fr; }
+    
+    .contact-section { padding: 60px 0; }
+    .contact-title { font-size: clamp(40px, 11vw, 64px); margin-bottom: 32px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 56px; }
+    .contact-card { padding: 24px 20px; }
+    .contact-value { font-size: 18px; }
+    .footer { padding-top: 40px; font-size: 9px; }
+  }
+  
+  @media (max-width: 480px) {
+    .header-section { padding: 80px 16px 50px; }
+    .dark-section { padding: 80px 16px 50px; }
+    .about-stats { grid-template-columns: 1fr; }
     .map-cities { grid-template-columns: 1fr; }
-    .parallax-sun { width: 80px; height: 80px; right: 12%; }
   }
 </style>
 </head>
@@ -668,10 +741,9 @@
     <div class="hero-bio">
       <p>
         En recherche d'<strong>alternance BTS Professions Immobilières</strong>
-        pour la rentrée 2026. Un profil <strong>hybride digital et commercial</strong>
-        que vous croisez rarement dans une candidature pour ce secteur.
-        Deux ans de développement web, cinq mois en conseil commercial, et un projet
-        professionnel clair : apprendre l'immobilier à vos côtés.
+        pour la rentrée 2026. Mon parcours mêle <strong>développement web et conseil commercial</strong>.
+        Une combinaison un peu inhabituelle pour ce secteur, et c'est précisément ce que
+        j'aimerais mettre au service de votre agence pendant ces deux ans.
       </p>
     </div>
     
@@ -699,7 +771,7 @@
     </div>
   </div>
   
-  <div class="scroll-indicator">Défiler · Le voyage commence</div>
+  <div class="scroll-indicator">Défiler</div>
 </section>
 
 <section class="parallax-section" id="parallax">
@@ -735,26 +807,25 @@
     <div id="about">
       <div class="section-tag">01 — À propos</div>
       <h2 class="section-title">
-        Le profil que vous<br><em>n'attendiez pas</em>.
+        Quelques mots<br><em>sur moi</em>.
       </h2>
       
       <div class="about-grid">
         <div class="about-text">
           <p>
-            Je sais ce que vous lisez d'habitude. Des candidats qui veulent
-            <strong>"évoluer dans l'humain"</strong> et qui <strong>"adorent le contact client"</strong>.
-            Moi je viens vous proposer quelque chose de différent.
+            Mon parcours n'est pas le plus classique pour candidater à un BTS Professions
+            Immobilières. J'ai passé deux ans en alternance comme <strong>développeur web</strong>
+            chez Voxymore, et cinq mois en <strong>conseil commercial</strong> au SAV Citroën GEMY.
           </p>
           <p>
-            J'ai passé deux ans à développer des sites web en alternance chez Voxymore,
-            et cinq mois en conseil commercial au SAV Citroën. Concrètement, je sais
-            <strong>gérer des clients exigeants dans la durée</strong>, livrer des projets
-            dans les délais, et travailler avec les outils numériques en agence.
+            Ces expériences m'ont appris à gérer des clients dans la durée, à respecter
+            des délais, et à travailler quotidiennement avec des outils numériques. Des
+            <strong>bases qui me semblent transférables</strong> au métier d'agent immobilier.
           </p>
           <p>
-            Mon objectif sur les deux ans d'alternance : maîtriser totalement le métier
-            d'agent immobilier, et combiner cette expertise avec mes compétences
-            techniques pour devenir <strong>réellement utile à votre agence</strong>.
+            L'objectif des deux années d'alternance pour moi : apprendre votre métier
+            auprès de votre équipe, et y apporter au fur et à mesure ce que je sais
+            déjà faire. <strong>C'est un échange dans les deux sens.</strong>
           </p>
         </div>
         
@@ -845,7 +916,7 @@
     <div class="skills-section" id="competences">
       <div class="section-tag">03 — Compétences</div>
       <h2 class="section-title">
-        Ce que je peux<br><em>apporter dès le jour 1</em>.
+        Ce que je peux<br><em>vous apporter</em>.
       </h2>
       
       <div class="skills-grid">
@@ -903,8 +974,8 @@
       </h2>
       
       <p class="objections-intro">
-        Avant de me rencontrer, vous avez probablement quelques questions en tête.
-        Voici les réponses, sans détour.
+        Voici les questions que je me poserais à votre place avant de me rencontrer,
+        et les réponses que je peux vous donner aujourd'hui.
       </p>
       
       <div class="objections-grid">
@@ -913,11 +984,10 @@
           <h3 class="objection-question">"Sera-t-il vraiment autonome ?"</h3>
           <div class="objection-divider"></div>
           <p class="objection-answer">
-            J'ai déjà <strong>trois années d'alternance</strong> derrière moi,
-            sur deux entreprises différentes. Je sais m'organiser, prioriser,
-            et livrer dans les délais sans qu'on me tienne la main. L'autonomie
-            n'est pas un objectif pour moi, c'est ma manière de fonctionner
-            depuis le premier jour.
+            J'ai derrière moi <strong>trois années d'alternance</strong> dans deux entreprises
+            différentes. J'ai pris l'habitude de m'organiser, de prioriser, et de
+            demander quand je ne sais pas. Je continue à apprendre, mais je n'ai
+            pas besoin qu'on me tienne la main au quotidien.
           </p>
         </div>
         
@@ -926,10 +996,10 @@
           <h3 class="objection-question">"Combien ça va vraiment coûter ?"</h3>
           <div class="objection-divider"></div>
           <p class="objection-answer">
-            L'alternance est <strong>largement financée par l'OPCO</strong> (jusqu'à 100%
-            pour la formation, plus aides à l'embauche). Le coût net pour vous
-            est minime, et plus que compensé par le temps que je libère sur
-            les tâches que vous me confiez dès les premiers mois.
+            L'alternance est <strong>largement financée par l'OPCO</strong>, avec en plus
+            des aides à l'embauche d'apprentis. Le reste à charge réel pour votre
+            agence concerne surtout ma rémunération mensuelle, qui suit un barème
+            légal en pourcentage du SMIC.
           </p>
         </div>
         
@@ -938,30 +1008,37 @@
           <h3 class="objection-question">"Quand sera-t-il vraiment utile ?"</h3>
           <div class="objection-divider"></div>
           <p class="objection-answer">
-            <strong>Dès le premier mois</strong>, je peux gérer la prospection
-            téléphonique, mettre à jour vos annonces en ligne, accompagner les
-            visites. À six mois, j'aurai mes premiers mandats. À douze mois,
-            je serai un négociateur fonctionnel. La courbe de valeur démarre
-            tout de suite.
+            Je n'aurai pas la compétence d'un négociateur dès l'arrivée, c'est
+            justement l'objet du BTS. Mais <strong>dès les premières semaines</strong>,
+            je peux prendre en charge la prospection téléphonique, la mise à jour
+            des annonces en ligne, le suivi CRM, et progresser au fil des mois
+            sur le cœur du métier.
           </p>
         </div>
       </div>
     </div>
     
     <div class="calc-section" id="calculator">
-      <div class="section-tag">05 — Démonstration technique</div>
+      <div class="section-tag">05 — Un petit aperçu</div>
       <h2 class="section-title">
         Un outil construit<br><em>en direct, ici</em>.
       </h2>
       
       <p class="calc-intro">
-        Une calculatrice de rentabilité locative interactive. Codée à la main pour ce portfolio.
-        Aucun candidat alternant BTS PI n'arrive avec ce genre d'outil dans sa candidature.
-        Vous pouvez la tester ci-dessous.
+        Une petite calculatrice de rentabilité locative interactive, codée pour ce portfolio.
+        Un exemple concret de ce que je peux faire avec mes outils digitaux, et que je
+        pourrais éventuellement adapter aux besoins de votre agence si l'occasion se présente.
       </p>
       
       <div class="calculator">
         <div class="calc-inputs">
+          <div class="calc-presets">
+            <span class="calc-presets-label">Exemples Le Mans :</span>
+            <button class="calc-preset" data-price="80000" data-rent="450" data-charges="1200">Studio centre</button>
+            <button class="calc-preset" data-price="180000" data-rent="750" data-charges="1500">T3 familial</button>
+            <button class="calc-preset" data-price="250000" data-rent="1100" data-charges="2200">Maison</button>
+          </div>
+          
           <div class="calc-input-group">
             <label class="calc-label">Prix d'achat du bien</label>
             <div class="calc-input-wrapper">
@@ -1021,15 +1098,15 @@
     </div>
     
     <div class="map-section">
-      <div class="section-tag">06 — Mobilité</div>
+      <div class="section-tag">06 — Sur quel secteur</div>
       <h2 class="section-title">
-        Ma zone d'action,<br><em>à vue de carte</em>.
+        Là où je peux<br><em>vraiment intervenir</em>.
       </h2>
       
       <p class="map-intro">
-        Le Mans et 25 kilomètres alentour. Toutes les communes accessibles
-        en moins de 30 minutes, véhicule personnel. Aucun trajet logistique
-        à arbitrer, aucun retard à craindre.
+        Une question pratique qu'une agence se pose toujours : sur quel secteur l'alternant
+        peut-il réellement assurer des visites, faire de la prospection terrain, gérer
+        un suivi client ? Voici ma zone effective au quotidien.
       </p>
       
       <div class="map-wrapper">
@@ -1107,13 +1184,14 @@
         
         <div>
           <h3 class="map-info-title">
-            Toute la métropole<br>
-            <em>en moins de 30 min</em>.
+            Une mobilité<br>
+            <em>sans contrainte</em>.
           </h3>
           <p class="map-info-text">
-            Le centre du Mans est mon point de départ, mais ma zone de prospection 
-            réelle s'étend bien au-delà. J'ai déjà couvert toutes les communes 
-            ci-contre dans le cadre de ma recherche d'alternance.
+            Toutes les communes ci-contre sont à moins de 30 minutes en voiture
+            depuis le Mans. Si votre agence couvre plusieurs secteurs de la
+            métropole ou sa périphérie, je peux suivre les rendez-vous, les
+            visites et la prospection sur l'ensemble de la zone.
           </p>
           
           <div class="map-cities">
@@ -1151,7 +1229,7 @@
       </div>
       
       <div class="footer">
-        <span class="footer-name">Benjamin Joubert</span> · Portfolio 2026 · Construit à la main, sans template
+        <span class="footer-name">Benjamin Joubert</span> · Portfolio 2026 · Construit pour cette candidature
       </div>
     </div>
     
@@ -1220,7 +1298,7 @@ const buildingTypes = [
   `,
 ];
 
-function generateLayer(layerId, color, count, signFrequency = 0.4) {
+function generateLayer(layerId, color, count) {
   const layer = document.getElementById(layerId);
   let html = '';
   
@@ -1228,25 +1306,7 @@ function generateLayer(layerId, color, count, signFrequency = 0.4) {
     const typeIdx = Math.floor(Math.random() * buildingTypes.length);
     const buildingSvg = buildingTypes[typeIdx](color);
     
-    let signHtml = '';
-    if (Math.random() < signFrequency) {
-      const signs = [
-        { text: 'À VENDRE', class: '' },
-        { text: 'À LOUER', class: '' },
-        { text: 'VENDU', class: 'sign-vendu' },
-        { text: 'NOUVEAU', class: '' },
-        { text: 'COUP DE CŒUR', class: '' },
-      ];
-      const sign = signs[Math.floor(Math.random() * signs.length)];
-      signHtml = `
-        <div class="sign ${sign.class}" style="bottom: -55px; left: 50%; transform: translateX(-50%) rotate(${Math.random() * 8 - 4}deg);">
-          <div class="sign-stick"></div>
-          <div class="sign-board">${sign.text}</div>
-        </div>
-      `;
-    }
-    
-    html += `<div class="building" style="margin-right: ${15 + Math.random() * 35}px; position: relative;">${buildingSvg}${signHtml}</div>`;
+    html += `<div class="building" style="margin-right: ${15 + Math.random() * 35}px;">${buildingSvg}</div>`;
   }
   
   layer.innerHTML = html;
@@ -1266,12 +1326,13 @@ function generateClouds() {
   cloudsContainer.innerHTML = html;
 }
 
-generateLayer('layerFar', colorsFar, 35, 0.15);
-generateLayer('layerMid', colorsMid, 25, 0.5);
-generateLayer('layerNear', colorsNear, 18, 0.7);
+generateLayer('layerFar', colorsFar, 35);
+generateLayer('layerMid', colorsMid, 25);
+generateLayer('layerNear', colorsNear, 18);
 generateClouds();
 
 const parallaxSection = document.querySelector('.parallax-section');
+const parallaxStage = document.querySelector('.parallax-stage');
 const layerFar = document.getElementById('layerFar');
 const layerMid = document.getElementById('layerMid');
 const layerNear = document.getElementById('layerNear');
@@ -1279,6 +1340,7 @@ const transitionSign = document.getElementById('transitionSign');
 const parallaxTitle = document.getElementById('parallaxTitle');
 const parallaxSun = document.getElementById('parallaxSun');
 const parallaxClouds = document.getElementById('parallaxClouds');
+const parallaxSky = document.querySelector('.parallax-sky');
 
 let rafId = null;
 
@@ -1289,34 +1351,54 @@ function updateParallax() {
   
   const progress = Math.max(0, Math.min(1, -rect.top / (sectionHeight - windowHeight)));
   
-  layerFar.style.transform = `translateX(${-progress * 800}px)`;
-  layerMid.style.transform = `translateX(${-progress * 1500}px)`;
-  layerNear.style.transform = `translateX(${-progress * 2500}px)`;
+  // Easing function pour rendre le mouvement plus naturel
+  const eased = progress < 0.5 
+    ? 2 * progress * progress 
+    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
   
-  parallaxClouds.style.transform = `translateX(${-progress * 400}px)`;
+  // Distances de translation réduites et avec easing
+  layerFar.style.transform = `translateX(${-eased * 500}px)`;
+  layerMid.style.transform = `translateX(${-eased * 900}px)`;
+  layerNear.style.transform = `translateX(${-eased * 1500}px)`;
   
-  const sunY = progress * 500;
-  const sunScale = 1 + progress * 0.5;
-  parallaxSun.style.transform = `translate(${progress * -80}px, ${sunY}px) scale(${sunScale})`;
-  parallaxSun.style.opacity = progress > 0.85 ? Math.max(0, 1 - (progress - 0.85) * 6) : 1;
+  parallaxClouds.style.transform = `translateX(${-progress * 300}px)`;
   
+  // Soleil : descente plus douce
+  const sunY = progress * 400;
+  const sunScale = 1 + progress * 0.3;
+  parallaxSun.style.transform = `translate(${progress * -60}px, ${sunY}px) scale(${sunScale})`;
+  parallaxSun.style.opacity = progress > 0.8 ? Math.max(0, 1 - (progress - 0.8) * 5) : 1;
+  
+  // Sky qui s'assombrit
+  parallaxSky.style.opacity = 1;
+  
+  // Titre qui change de couleur quand le ciel s'assombrit
   if (progress > 0.55) {
     parallaxTitle.classList.add('dark-mode');
   } else {
     parallaxTitle.classList.remove('dark-mode');
   }
   
-  if (progress > 0.5) {
-    const fadeOut = Math.max(0, 1 - (progress - 0.5) * 4);
+  // Titre qui s'estompe avant l'apparition du panneau
+  if (progress > 0.45) {
+    const fadeOut = Math.max(0, 1 - (progress - 0.45) * 4);
     parallaxTitle.style.opacity = fadeOut;
   } else {
     parallaxTitle.style.opacity = 1;
   }
   
-  if (progress > 0.65) {
+  // PANNEAU VENDU - apparition fiable à 60%
+  if (progress > 0.6) {
     transitionSign.classList.add('visible');
   } else {
     transitionSign.classList.remove('visible');
+  }
+  
+  // Background du stage passe au noir à la fin pour transition douce vers la section noire
+  if (progress > 0.85) {
+    parallaxStage.classList.add('dark-phase');
+  } else {
+    parallaxStage.classList.remove('dark-phase');
   }
   
   rafId = null;
@@ -1370,6 +1452,24 @@ function updateCalc() {
   
   slider.addEventListener('input', () => {
     input.value = slider.value;
+    updateCalc();
+  });
+});
+
+// Préréglages calculatrice
+document.querySelectorAll('.calc-preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const price = btn.dataset.price;
+    const rent = btn.dataset.rent;
+    const charges = btn.dataset.charges;
+    
+    document.getElementById('calcPrice').value = price;
+    document.getElementById('calcPriceSlider').value = price;
+    document.getElementById('calcRent').value = rent;
+    document.getElementById('calcRentSlider').value = rent;
+    document.getElementById('calcCharges').value = charges;
+    document.getElementById('calcChargesSlider').value = charges;
+    
     updateCalc();
   });
 });
