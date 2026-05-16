@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Benjamin Joubert · Portfolio</title>
+<meta name="description" content="Benjamin Joubert · Alternance BTS Professions Immobilières · Le Mans 2026 · Profil digital et commercial">
+<title>Benjamin Joubert · Portfolio Immobilier</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -30,7 +31,32 @@
     line-height: 1.6;
   }
   
-  ::selection { background: var(--rust); color: var(--bone); }
+  /* ANCRES SCROLL (compense le header fixe) */
+  #about, #parcours, #competences, #objections, #pulse, #calculator, #avantapres, #contact {
+    scroll-margin-top: 80px;
+  }
+
+  /* LIEN ACTIF NAV */
+  .nav-links a { position: relative; }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a:hover { opacity: 1; }
+
+  /* CURSOR SLIDER AVANT/APRÈS */
+  .compare-wrapper { cursor: ew-resize; }
+
+  /* FOOTER CONTACT : ligne signature */
+  .footer-signature {
+    color: rgba(248, 245, 240, 0.25);
+    margin: 0 12px;
+  }
   
   .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -48,64 +74,116 @@
   /* HEADER ÉDITORIAL */
   .header-section {
     min-height: 100vh; background: var(--cream);
-    padding: 140px 64px 80px;
+    padding: 100px 64px 64px;
     position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
   }
   .header-section::before {
     content: ''; position: absolute; inset: 0;
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 30%, rgba(184, 68, 44, 0.04) 0%, transparent 50%),
       radial-gradient(circle at 80% 70%, rgba(196, 165, 116, 0.06) 0%, transparent 50%);
     pointer-events: none;
   }
+  .hero-grain {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px; pointer-events: none; opacity: 0.6;
+  }
+  .hero-top {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 48px; position: relative; z-index: 1;
+  }
   .editorial-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--rust); margin-bottom: 32px;
+    color: var(--rust);
     display: flex; align-items: center; gap: 16px;
   }
   .editorial-tag::before {
     content: ''; width: 40px; height: 1px; background: var(--rust);
   }
+  .hero-cta {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink); padding: 12px 24px;
+    border: 1px solid rgba(26, 24, 20, 0.25);
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .hero-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--rust); transform: scaleX(0);
+    transform-origin: left; transition: transform 0.3s ease;
+  }
+  .hero-cta:hover::before { transform: scaleX(1); }
+  .hero-cta:hover { color: var(--cream); border-color: var(--rust); }
+  .hero-cta span, .hero-cta svg { position: relative; z-index: 1; }
   .hero-title {
     font-family: 'Fraunces', serif; font-weight: 300;
-    font-size: clamp(56px, 9vw, 144px); line-height: 0.9;
-    letter-spacing: -0.03em; color: var(--ink); margin-bottom: 48px;
+    font-size: clamp(72px, 12vw, 160px); line-height: 0.88;
+    letter-spacing: -0.03em; color: var(--ink); margin-bottom: 40px;
     font-variation-settings: "opsz" 144;
+    position: relative; z-index: 1;
   }
-  .hero-title em {
-    font-style: italic; font-weight: 400; color: var(--rust);
+  .hero-title em { font-style: italic; font-weight: 400; color: var(--rust); }
+  .hero-tagline {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(16px, 2.2vw, 22px);
+    font-weight: 300; line-height: 1.55;
+    color: rgba(26, 24, 20, 0.65);
+    max-width: 640px; margin-bottom: 56px;
+    position: relative; z-index: 1;
   }
+  .hero-tagline em { font-style: italic; color: var(--rust); font-weight: 400; }
   .hero-grid {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; margin-top: 80px; max-width: 1400px;
+    gap: 80px; position: relative; z-index: 1;
   }
+  .hero-left { display: flex; flex-direction: column; gap: 32px; }
   .hero-bio {
-    font-family: 'Fraunces', serif; font-size: 22px;
-    line-height: 1.5; font-weight: 300; color: var(--ink); max-width: 540px;
+    font-family: 'Fraunces', serif; font-size: 18px;
+    line-height: 1.6; font-weight: 300; color: var(--ink);
   }
   .hero-bio strong {
     font-weight: 500;
     background: linear-gradient(180deg, transparent 60%, rgba(184, 68, 44, 0.15) 60%);
-    padding: 0 4px;
+    padding: 0 3px;
   }
+  .hero-domains {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .hero-domain {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--rust); padding: 6px 14px;
+    border: 1px solid rgba(184, 68, 44, 0.3);
+    background: rgba(184, 68, 44, 0.04);
+  }
+  .hero-domain-sep { color: rgba(26, 24, 20, 0.3); font-size: 14px; }
   .hero-meta {
-    display: flex; flex-direction: column; gap: 24px;
+    display: flex; flex-direction: column;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px; letter-spacing: 0.1em; color: var(--ash);
   }
   .meta-row {
     display: grid; grid-template-columns: 100px 1fr;
-    gap: 24px; padding-bottom: 16px;
+    gap: 24px; padding: 14px 0;
     border-bottom: 1px solid var(--cream-dark);
   }
+  .meta-row:first-child { border-top: 1px solid var(--cream-dark); }
   .meta-label { text-transform: uppercase; color: var(--rust); font-weight: 500; }
   .meta-value {
     font-family: 'Manrope', sans-serif;
     font-size: 14px; letter-spacing: 0; color: var(--ink);
   }
+  .hero-bottom {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-top: 56px; position: relative; z-index: 1;
+  }
   .scroll-indicator {
-    position: absolute; bottom: 40px; left: 64px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
     color: var(--ash);
@@ -117,7 +195,19 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(8px); }
   }
+  .hero-manifeste {
+    font-family: 'Fraunces', serif;
+    font-size: 13px; font-style: italic;
+    color: rgba(26, 24, 20, 0.4);
+    text-align: right; max-width: 360px; line-height: 1.5;
+  }
+
   
+  .hero-main {
+    position: relative; z-index: 1;
+  }
+  .hero-main-left { display: flex; flex-direction: column; }
+
   /* PARALLAXE */
   .parallax-section {
     height: 150vh; position: relative; overflow: hidden;
@@ -332,11 +422,13 @@
     border: 1px solid rgba(196, 165, 116, 0.2);
     background: rgba(196, 165, 116, 0.03);
     transition: all 0.4s;
+    cursor: default;
   }
   .stat-card:hover {
     border-color: var(--gold);
     background: rgba(196, 165, 116, 0.08);
     transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
   }
   .stat-number {
     font-family: 'Fraunces', serif;
@@ -1158,39 +1250,101 @@
   
   /* CONTACT */
   .contact-section {
-    text-align: center; padding: 80px 0;
+    padding: 120px 0 80px;
     border-top: 1px solid rgba(248, 245, 240, 0.1);
   }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+    margin-bottom: 100px;
+  }
+  .contact-left {}
   .contact-title {
     font-family: 'Fraunces', serif;
-    font-size: clamp(56px, 9vw, 144px);
+    font-size: clamp(48px, 7vw, 96px);
     font-weight: 300; line-height: 0.95;
-    letter-spacing: -0.03em; margin-bottom: 48px;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
   }
   .contact-title em { font-style: italic; color: var(--rust); }
-  .contact-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 40px; max-width: 900px; margin: 0 auto 80px;
-  }
-  .contact-card {
-    padding: 40px 32px;
-    border: 1px solid rgba(248, 245, 240, 0.1);
-    transition: all 0.4s;
-    text-decoration: none; color: inherit; display: block;
-  }
-  .contact-card:hover {
-    background: rgba(184, 68, 44, 0.05);
-    border-color: var(--rust);
-    transform: translateY(-4px);
-  }
-  .contact-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 12px;
-  }
-  .contact-value {
+  .contact-phrase {
     font-family: 'Fraunces', serif;
-    font-size: 22px; font-weight: 400;
+    font-size: 18px; font-weight: 300;
+    line-height: 1.6;
+    color: rgba(248, 245, 240, 0.6);
+    font-style: italic;
+  }
+
+  .contact-right {
+    display: flex; flex-direction: column; gap: 32px;
+  }
+
+  .contact-phone {
+    display: block; text-decoration: none;
+    padding: 40px 40px;
+    border: 1px solid rgba(184, 68, 44, 0.3);
+    background: rgba(184, 68, 44, 0.04);
+    transition: all 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .contact-phone::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(184, 68, 44, 0.08), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .contact-phone:hover { border-color: var(--rust); transform: translateY(-3px); box-shadow: 0 20px 50px rgba(184, 68, 44, 0.15); }
+  .contact-phone:hover::before { opacity: 1; }
+  .contact-phone-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--rust);
+    margin-bottom: 12px;
+  }
+  .contact-phone-number {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300; letter-spacing: -0.01em;
+    color: var(--bone); line-height: 1;
+    margin-bottom: 16px;
+  }
+  .contact-phone-hint {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    color: rgba(248, 245, 240, 0.35);
+    text-transform: uppercase;
+  }
+
+  .contact-secondary {
+    display: flex; flex-direction: column;
+    border: 1px solid rgba(248, 245, 240, 0.08);
+    overflow: hidden;
+  }
+  .contact-line {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 28px;
+    text-decoration: none; color: inherit;
+    border-bottom: 1px solid rgba(248, 245, 240, 0.06);
+    transition: background 0.3s;
+  }
+  .contact-line:last-child { border-bottom: none; }
+  .contact-line:hover { background: rgba(248, 245, 240, 0.04); }
+  .contact-line-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.45);
+    flex-shrink: 0; margin-right: 24px;
+  }
+  .contact-line-value {
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px; color: rgba(248, 245, 240, 0.85);
+    text-align: right;
   }
   .footer {
     padding-top: 64px;
@@ -1208,14 +1362,15 @@
     .nav-links { display: none; }
     .nav-logo { font-size: 11px; }
     
-    .header-section { padding: 90px 20px 60px; }
-    .hero-title { font-size: clamp(48px, 13vw, 80px); margin-bottom: 32px; }
-    .editorial-tag { font-size: 10px; margin-bottom: 24px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
-    .hero-bio { font-size: 17px; }
-    .meta-row { grid-template-columns: 80px 1fr; gap: 12px; padding-bottom: 12px; }
-    .meta-value { font-size: 13px; }
-    .scroll-indicator { left: 20px; bottom: 24px; font-size: 9px; }
+    .header-section { padding: 80px 20px 48px; }
+    .hero-top { flex-direction: column; align-items: flex-start; gap: 24px; margin-bottom: 32px; }
+    .hero-cta { font-size: 10px; padding: 10px 18px; align-self: flex-start; }
+    .hero-title { font-size: clamp(56px, 14vw, 88px); margin-bottom: 28px; }
+    .hero-tagline { font-size: 16px; margin-bottom: 40px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; margin-top: 40px; }
+    .hero-manifeste { text-align: left; max-width: 100%; font-size: 12px; }
+    .meta-row { grid-template-columns: 80px 1fr; gap: 12px; padding: 12px 0; }
     
     .parallax-section { height: 180vh; }
     .parallax-sun { width: 70px; height: 70px; right: 10%; top: 10%; }
@@ -1318,11 +1473,13 @@
     .map-info-text { font-size: 15px; }
     .map-cities { grid-template-columns: 1fr 1fr; }
     
-    .contact-section { padding: 60px 0; }
-    .contact-title { font-size: clamp(40px, 11vw, 64px); margin-bottom: 32px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 56px; }
-    .contact-card { padding: 24px 20px; }
-    .contact-value { font-size: 18px; }
+    .contact-section { padding: 80px 0 60px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
+    .contact-title { font-size: clamp(40px, 11vw, 64px); margin-bottom: 24px; }
+    .contact-phone { padding: 28px 24px; }
+    .contact-phone-number { font-size: clamp(28px, 8vw, 40px); }
+    .contact-line { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .contact-line-value { text-align: left; font-size: 14px; }
     .footer { padding-top: 40px; font-size: 9px; }
   }
   
@@ -1349,22 +1506,53 @@
 </nav>
 
 <section class="header-section">
-  <div class="editorial-tag">Portfolio · Édition 2026 · N°001</div>
-  
-  <h1 class="hero-title">
-    Benjamin<br>Joubert<em>.</em>
-  </h1>
-  
-  <div class="hero-grid">
-    <div class="hero-bio">
-      <p>
-        En recherche d'<strong>alternance BTS Professions Immobilières</strong>
-        pour la rentrée 2026. Mon parcours mêle <strong>développement web et conseil commercial</strong>.
-        Une combinaison un peu inhabituelle pour ce secteur, et c'est précisément ce que
-        j'aimerais mettre au service de votre agence pendant ces deux ans.
-      </p>
+
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <div class="hero-top">
+    <div class="editorial-tag">Recherche alternance · BTS PI · Sarthe 2026</div>
+    <a href="#contact" class="hero-cta">
+      <span>Me contacter</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="hero-main">
+    <div class="hero-main-left">
+      <h1 class="hero-title">
+        Benjamin<br>Joubert<em>.</em>
+      </h1>
+
+      <div class="hero-tagline">
+        L'immobilier m'attire parce que chaque bien<br>
+        représente une <em>décision de vie</em> pour quelqu'un.<br>
+        C'est ce qui me donne envie d'apprendre ce métier sérieusement.
+      </div>
     </div>
-    
+  </div>
+
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-bio">
+        <p>
+          En recherche d'<strong>alternance BTS Professions Immobilières</strong>
+          pour la rentrée 2026. Mon parcours mêle <strong>développement web et conseil commercial</strong>,
+          une combinaison rare dans ce secteur, que je veux mettre au service
+          de votre agence pendant ces deux ans.
+        </p>
+      </div>
+
+      <div class="hero-domains">
+        <span class="hero-domain">Transaction</span>
+        <span class="hero-domain-sep">·</span>
+        <span class="hero-domain">Gestion locative</span>
+        <span class="hero-domain-sep">·</span>
+        <span class="hero-domain">Syndic</span>
+      </div>
+    </div>
+
     <div class="hero-meta">
       <div class="meta-row">
         <span class="meta-label">Âge</span>
@@ -1372,24 +1560,34 @@
       </div>
       <div class="meta-row">
         <span class="meta-label">Basé à</span>
-        <span class="meta-value">Le Mans, Sarthe</span>
+        <span class="meta-value">Le Mans · Sarthe (72)</span>
       </div>
       <div class="meta-row">
         <span class="meta-label">Permis</span>
         <span class="meta-value">B · Véhicule personnel</span>
       </div>
       <div class="meta-row">
-        <span class="meta-label">Formation</span>
-        <span class="meta-value">BTS PI · ESPL Angers · Sept. 2026</span>
+        <span class="meta-label">École</span>
+        <span class="meta-value">ESPL Angers · BTS PI · Sept. 2026</span>
       </div>
       <div class="meta-row">
-        <span class="meta-label">Statut</span>
-        <span class="meta-value">Disponible immédiatement pour échange</span>
+        <span class="meta-label">Alternance</span>
+        <span class="meta-value">Recherche active · Le Mans et alentours</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Contact</span>
+        <span class="meta-value">07 87 66 66 49</span>
       </div>
     </div>
   </div>
-  
-  <div class="scroll-indicator">Défiler</div>
+
+  <div class="hero-bottom">
+    <div class="scroll-indicator">Défiler</div>
+    <div class="hero-manifeste">
+      "Ce portfolio n'est pas un CV mis en page. C'est une démonstration."
+    </div>
+  </div>
+
 </section>
 
 <section class="parallax-section" id="parallax">
@@ -1412,7 +1610,7 @@
     
     <div class="transition-sign" id="transitionSign">
       <div class="transition-board">VENDU</div>
-      <div class="transition-sub">Au candidat suivant</div>
+      <div class="transition-sub">Place au candidat suivant</div>
     </div>
     
     <div class="ground"></div>
@@ -1495,6 +1693,19 @@
       </div>
       
       <div class="timeline-item">
+        <div class="timeline-date">2018 · 2021</div>
+        <div>
+          <div class="timeline-title">Bac Technologique STMG</div>
+          <div class="timeline-company">Lycée Touchard-Washington · Le Mans · Mercatique</div>
+          <div class="timeline-desc">
+            Spécialité Mercatique. Premiers fondamentaux en stratégie commerciale,
+            comportement du consommateur, communication et gestion. Une base
+            qui oriente naturellement vers les métiers de la vente et du service.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
         <div class="timeline-date">2021 · 2022</div>
         <div>
           <div class="timeline-title">Conseiller Commercial</div>
@@ -1552,10 +1763,10 @@
           <div class="skill-title">Relation Client</div>
           <ul class="skill-list">
             <li>Accueil et qualification des besoins</li>
-            <li>Gestion des clients exigeants</li>
+            <li>Gestion des clients exigeants dans la durée</li>
             <li>Suivi long-terme et fidélisation</li>
-            <li>Communication multicanal</li>
-            <li>Reformulation et négociation</li>
+            <li>Communication claire et rassurante</li>
+            <li>Reformulation et gestion des objections</li>
           </ul>
         </div>
         
@@ -1566,11 +1777,11 @@
           </svg>
           <div class="skill-title">Outils Digitaux</div>
           <ul class="skill-list">
-            <li>Création de sites et landing pages</li>
-            <li>Photographie de biens</li>
-            <li>Gestion CRM et automatisation</li>
-            <li>Réseaux sociaux et SEO</li>
-            <li>Suite Office et collaboratifs</li>
+            <li>Mise en valeur des biens en ligne</li>
+            <li>Photographie et retouche de biens</li>
+            <li>Gestion CRM et suivi de leads</li>
+            <li>Diffusion multi-plateformes</li>
+            <li>Suite Office · outils collaboratifs</li>
           </ul>
         </div>
         
@@ -2255,27 +2466,50 @@
     </div>
     
     <div class="contact-section" id="contact">
-      <h2 class="contact-title">
-        On se voit<br><em>en agence ?</em>
-      </h2>
-      
-      <div class="contact-grid">
-        <a href="tel:+33787666649" class="contact-card">
-          <div class="contact-label">Téléphone</div>
-          <div class="contact-value">07 87 66 66 49</div>
-        </a>
-        <a href="mailto:benjamin.joubert6@gmail.com" class="contact-card">
-          <div class="contact-label">Email</div>
-          <div class="contact-value">benjamin.joubert6@gmail.com</div>
-        </a>
-        <div class="contact-card" style="cursor:default">
-          <div class="contact-label">Localisation</div>
-          <div class="contact-value">Le Mans · 72100</div>
+      <div class="contact-inner">
+        <div class="contact-left">
+          <div class="section-tag" style="margin-bottom: 40px;">Dernière étape</div>
+          <h2 class="contact-title">
+            On se voit<br><em>en agence ?</em>
+          </h2>
+          <p class="contact-phrase">
+            Le plus simple : un coup de fil.<br>
+            Je réponds tous les jours, y compris le week-end.
+          </p>
+        </div>
+
+        <div class="contact-right">
+          <a href="tel:+33787666649" class="contact-phone">
+            <span class="contact-phone-label">Téléphone</span>
+            <span class="contact-phone-number">07 87 66 66 49</span>
+            <span class="contact-phone-hint">Appuyer pour appeler →</span>
+          </a>
+
+          <div class="contact-secondary">
+            <a href="mailto:benjamin.joubert6@gmail.com" class="contact-line">
+              <span class="contact-line-label">Email</span>
+              <span class="contact-line-value">benjamin.joubert6@gmail.com</span>
+            </a>
+            <a href="https://www.linkedin.com/in/benjamin-joubert" target="_blank" rel="noopener" class="contact-line">
+              <span class="contact-line-label">LinkedIn</span>
+              <span class="contact-line-value">benjamin-joubert</span>
+            </a>
+            <div class="contact-line" style="cursor:default">
+              <span class="contact-line-label">Localisation</span>
+              <span class="contact-line-value">Le Mans · 72100</span>
+            </div>
+          </div>
         </div>
       </div>
-      
+
       <div class="footer">
-        <span class="footer-name">Benjamin Joubert</span> · Portfolio 2026 · Construit pour cette candidature
+        <span class="footer-name">Benjamin Joubert</span>
+        <span class="footer-signature">·</span>
+        Portfolio 2026
+        <span class="footer-signature">·</span>
+        Construit pour cette candidature
+        <span class="footer-signature">·</span>
+        Le Mans, Sarthe
       </div>
     </div>
     
