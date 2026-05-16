@@ -221,23 +221,27 @@
     border: 4px solid var(--rust-deep);
     padding: 32px 80px;
     font-family: 'Fraunces', serif; font-weight: 700;
-    font-size: clamp(56px, 9vw, 120px);
+    font-size: clamp(48px, 11vw, 120px);
     letter-spacing: -0.01em; line-height: 1;
     box-shadow: 12px 12px 0 var(--black), 0 40px 80px rgba(0,0,0,0.5);
   }
   .transition-sub {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase;
+    font-size: clamp(11px, 2.5vw, 13px);
+    letter-spacing: 0.3em; text-transform: uppercase;
     color: var(--cream); margin-top: 24px;
     background: var(--ink);
     display: inline-block; padding: 10px 24px;
+  }
+  @media (max-width: 900px) {
+    .transition-board { padding: 24px 40px; border-width: 3px; box-shadow: 6px 6px 0 var(--black), 0 20px 40px rgba(0,0,0,0.5); }
+    .transition-sub { padding: 8px 16px; }
   }
   
   /* SECTION NOIRE */
   .dark-section {
     background: var(--black); color: var(--bone);
     padding: 160px 64px 80px; position: relative;
-    margin-top: -50vh;
   }
   .dark-section::before {
     content: ''; position: absolute; inset: 0;
@@ -2054,6 +2058,18 @@ const parallaxSun = document.getElementById('parallaxSun');
 const parallaxClouds = document.getElementById('parallaxClouds');
 const parallaxSky = document.querySelector('.parallax-sky');
 
+const darkSection = document.querySelector('.dark-section');
+
+function fixDarkSectionMargin() {
+  const parallaxH = parallaxSection.offsetHeight;
+  const windowH = window.innerHeight;
+  const void_ = parallaxH - windowH;
+  darkSection.style.marginTop = `-${Math.max(0, void_)}px`;
+}
+
+fixDarkSectionMargin();
+window.addEventListener('resize', fixDarkSectionMargin);
+
 let rafId = null;
 
 function updateParallax() {
@@ -2099,8 +2115,11 @@ function updateParallax() {
     parallaxTitle.style.opacity = 1;
   }
   
-  // PANNEAU VENDU - apparaît à 55%, reste visible jusqu'à la fin
-  if (progress > 0.55) {
+  const isMobile = window.innerWidth < 900;
+  const vendTrigger = isMobile ? 0.35 : 0.55;
+
+  // PANNEAU VENDU
+  if (progress > vendTrigger) {
     transitionSign.classList.add('visible');
     transitionSign.classList.remove('hiding');
   } else {
