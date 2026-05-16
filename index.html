@@ -74,7 +74,7 @@
   /* HEADER ÉDITORIAL */
   .header-section {
     min-height: 100vh; background: var(--cream);
-    padding: 100px 64px 64px;
+    padding: 140px 64px 80px;
     position: relative; overflow: hidden;
     display: flex; flex-direction: column;
     justify-content: space-between;
@@ -121,6 +121,8 @@
   .hero-cta:hover::before { transform: scaleX(1); }
   .hero-cta:hover { color: var(--cream); border-color: var(--rust); }
   .hero-cta span, .hero-cta svg { position: relative; z-index: 1; }
+  .hero-main { position: relative; z-index: 1; }
+  .hero-main-left { display: flex; flex-direction: column; }
   .hero-title {
     font-family: 'Fraunces', serif; font-weight: 300;
     font-size: clamp(72px, 12vw, 160px); line-height: 0.88;
@@ -201,12 +203,6 @@
     color: rgba(26, 24, 20, 0.4);
     text-align: right; max-width: 360px; line-height: 1.5;
   }
-
-  
-  .hero-main {
-    position: relative; z-index: 1;
-  }
-  .hero-main-left { display: flex; flex-direction: column; }
 
   /* PARALLAXE */
   .parallax-section {
@@ -294,7 +290,7 @@
     transform: translate(-50%, -50%) rotate(-8deg) scale(0);
     z-index: 20; text-align: center;
     opacity: 0;
-    transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 0.5s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     will-change: transform, opacity;
   }
   .transition-sign.visible {
@@ -1376,6 +1372,7 @@
     .parallax-sun { width: 70px; height: 70px; right: 10%; top: 10%; }
     .parallax-heading { font-size: clamp(28px, 7vw, 42px); }
     .parallax-eyebrow { font-size: 10px; margin-bottom: 16px; }
+    .parallax-title { top: 22% !important; }
     .transition-board { padding: 18px 32px; font-size: clamp(40px, 12vw, 64px); box-shadow: 6px 6px 0 var(--black), 0 20px 40px rgba(0,0,0,0.5); }
     .transition-sub { font-size: 10px; padding: 8px 16px; margin-top: 16px; }
     .ground { height: 100px; }
