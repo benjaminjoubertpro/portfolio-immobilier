@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Benjamin Joubert — Portfolio</title>
+<title>Benjamin Joubert · Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -914,6 +914,8 @@
   }
   .pulse-table tr:hover td { background: rgba(184, 68, 44, 0.03); }
   .pulse-table td strong { color: var(--bone); font-weight: 500; }
+  .pulse-mobile-profile { display: none; }
+
   .pulse-bar-wrap {
     display: flex; align-items: center; gap: 14px;
   }
@@ -952,6 +954,166 @@
     max-width: 720px;
     padding-left: 24px;
     border-left: 3px solid var(--rust);
+  }
+
+  .demo-label {
+    display: flex; align-items: center; gap: 20px;
+    margin-bottom: 28px;
+  }
+  .demo-label-num {
+    width: 40px; height: 40px;
+    border: 1px solid var(--rust);
+    color: var(--rust);
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 400; font-style: italic;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .demo-label-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.6);
+  }
+
+  .roi-intro {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; font-weight: 300; line-height: 1.6;
+    color: rgba(248, 245, 240, 0.7);
+    max-width: 680px; margin-bottom: 36px;
+    font-style: italic;
+  }
+
+  .roi-calc .calc-results { background: rgba(196, 165, 116, 0.03); }
+
+  .roi-cost-note {
+    margin-top: 32px; padding: 20px;
+    background: rgba(196, 165, 116, 0.05);
+    border-left: 2px solid var(--gold);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
+  }
+  .roi-cost-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); flex-shrink: 0;
+  }
+  .roi-cost-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 300;
+    color: var(--bone); flex-shrink: 0;
+  }
+  .roi-cost-detail {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: rgba(248, 245, 240, 0.45);
+    width: 100%;
+  }
+
+  .roi-scenarios {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 28px;
+  }
+  .roi-scenario {
+    padding: 20px 16px;
+    background: rgba(248, 245, 240, 0.03);
+    border: 1px solid rgba(248, 245, 240, 0.08);
+    text-align: center;
+    position: relative;
+  }
+  .roi-scenario-mid {
+    border-color: rgba(196, 165, 116, 0.25);
+    background: rgba(196, 165, 116, 0.04);
+  }
+  .roi-scenario-best {
+    border-color: rgba(184, 68, 44, 0.35);
+    background: rgba(184, 68, 44, 0.06);
+  }
+  .roi-scenario-badge {
+    position: absolute; top: -10px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold); color: var(--black);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    padding: 3px 10px; white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .roi-scenario-badge--best { background: var(--rust); color: var(--cream); }
+  .roi-scenario-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.5);
+    margin-bottom: 10px; margin-top: 8px;
+  }
+  .roi-scenario-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 300;
+    color: var(--bone); margin-bottom: 6px;
+  }
+  .roi-scenario-value--mid { color: var(--gold); font-style: italic; }
+  .roi-scenario-value--best { color: var(--rust); font-style: italic; font-size: 26px; }
+  .roi-scenario-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    color: rgba(248, 245, 240, 0.4); text-transform: uppercase;
+  }
+
+  .roi-ratio-wrap {
+    text-align: center; padding: 24px 0;
+    border-top: 1px solid rgba(248, 245, 240, 0.08);
+    border-bottom: 1px solid rgba(248, 245, 240, 0.08);
+    margin-bottom: 20px;
+  }
+  .roi-ratio-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.5); margin-bottom: 8px;
+  }
+  .roi-ratio-value {
+    font-family: 'Fraunces', serif;
+    font-size: 72px; font-weight: 300; line-height: 1;
+    color: var(--rust); font-style: italic;
+    letter-spacing: -0.02em;
+  }
+  .roi-ratio-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    color: rgba(248, 245, 240, 0.4); text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .calc-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 20px; margin-top: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(196, 165, 116, 0.15);
+  }
+  .calc-mensualite-block {
+    margin: 24px 0;
+    border: 1px solid rgba(196, 165, 116, 0.12);
+    overflow: hidden;
+  }
+  .calc-mensualite-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(248, 245, 240, 0.05);
+  }
+  .calc-mensualite-row:last-child { border-bottom: none; }
+  .calc-mensualite-row--total {
+    background: rgba(184, 68, 44, 0.06);
+    padding: 14px 16px;
+  }
+  .calc-mensualite-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(248, 245, 240, 0.55);
+  }
+  .calc-mensualite-val {
+    font-family: 'Fraunces', serif;
+    font-size: 16px; font-weight: 400;
+    color: var(--bone);
   }
 
   /* CARTE */
@@ -1102,6 +1264,13 @@
     .calc-input { font-size: 24px; }
     .calc-unit { font-size: 18px; }
     .calc-preset { font-size: 10px; padding: 6px 12px; }
+    .demo-label { flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .demo-label-text { font-size: 9px; }
+    .roi-scenarios { grid-template-columns: 1fr; gap: 24px; }
+    .roi-scenario-badge { position: static; transform: none; display: inline-block; margin-bottom: 10px; }
+    .roi-scenario { padding: 16px; }
+    .roi-ratio-value { font-size: 56px; }
+    .roi-cost-note { flex-direction: column; gap: 4px; }
     
     .pulse-section { margin-bottom: 120px; }
     .pulse-intro { font-size: 17px; margin-bottom: 40px; }
@@ -1109,10 +1278,20 @@
     .pulse-tile { padding: 28px 24px; }
     .pulse-tile-large .pulse-value { font-size: 56px; }
     .pulse-tile:not(.pulse-tile-large) .pulse-value { font-size: 40px; }
-    .pulse-table th, .pulse-table td { font-size: 13px; padding: 14px 8px; }
+    .pulse-table th:last-child,
     .pulse-table td:last-child { display: none; }
-    .pulse-bar { display: none; }
-    .pulse-price { font-size: 16px; }
+    .pulse-mobile-profile {
+      display: block;
+      font-size: 11px;
+      color: rgba(248, 245, 240, 0.45);
+      margin-top: 4px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .pulse-bar { max-width: 50px; min-width: 20px; }
+    .pulse-table th, .pulse-table td { font-size: 13px; padding: 14px 8px; }
+    .pulse-price { font-size: 15px; }
     .pulse-pitch { font-size: 18px; padding-left: 18px; }
     .pulse-footer { flex-direction: column; align-items: flex-start; font-size: 9px; }
     
@@ -1158,7 +1337,7 @@
 <body>
 
 <nav class="nav">
-  <div class="nav-logo">BJ — 2026</div>
+  <div class="nav-logo">BJ · 2026</div>
   <div class="nav-links">
     <a href="#about">À propos</a>
     <a href="#parcours">Parcours</a>
@@ -1244,7 +1423,7 @@
   <div class="container">
     
     <div id="about">
-      <div class="section-tag">01 — À propos</div>
+      <div class="section-tag">01 · À propos</div>
       <h2 class="section-title">
         Quelques mots<br><em>sur moi</em>.
       </h2>
@@ -1296,13 +1475,13 @@
     </div>
     
     <div class="timeline" id="parcours">
-      <div class="section-tag">02 — Parcours</div>
+      <div class="section-tag">02 · Parcours</div>
       <h2 class="section-title">
         Trois étapes,<br><em>une direction</em>.
       </h2>
       
       <div class="timeline-item">
-        <div class="timeline-date">2023 — 2025</div>
+        <div class="timeline-date">2023 · 2025</div>
         <div>
           <div class="timeline-title">Développeur Web</div>
           <div class="timeline-company">Voxymore · Le Mans · Alternance BTS</div>
@@ -1316,7 +1495,7 @@
       </div>
       
       <div class="timeline-item">
-        <div class="timeline-date">2021 — 2022</div>
+        <div class="timeline-date">2021 · 2022</div>
         <div>
           <div class="timeline-title">Conseiller Commercial</div>
           <div class="timeline-company">Citroën GEMY · Le Mans · Alternance · 5 mois</div>
@@ -1330,7 +1509,7 @@
       </div>
       
       <div class="timeline-item">
-        <div class="timeline-date">2022 — 2023</div>
+        <div class="timeline-date">2022 · 2023</div>
         <div>
           <div class="timeline-title">Expériences diverses</div>
           <div class="timeline-company">Intérim · CDD · Sarthe</div>
@@ -1359,7 +1538,7 @@
     </div>
     
     <div class="skills-section" id="competences">
-      <div class="section-tag">03 — Compétences</div>
+      <div class="section-tag">03 · Compétences</div>
       <h2 class="section-title">
         Ce que je peux<br><em>vous apporter</em>.
       </h2>
@@ -1413,7 +1592,7 @@
     </div>
     
     <div class="objections-section" id="objections">
-      <div class="section-tag">04 — Pourquoi moi</div>
+      <div class="section-tag">04 · Pourquoi moi</div>
       <h2 class="section-title">
         Trois doutes,<br><em>trois réponses</em>.
       </h2>
@@ -1465,7 +1644,7 @@
     
     <!-- PULSE MARCHÉ LE MANS -->
     <div class="pulse-section" id="pulse">
-      <div class="section-tag">05 — Pulse marché Le Mans</div>
+      <div class="section-tag">05 · Pulse marché Le Mans</div>
       <h2 class="section-title">
         Ma veille du marché,<br><em>en quelques chiffres</em>.
       </h2>
@@ -1524,7 +1703,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>Jacobins / Centre</strong></td>
+              <td><strong>Jacobins / Centre</strong><span class="pulse-mobile-profile">Premium · Patrimoine historique</span></td>
               <td>
                 <div class="pulse-bar-wrap">
                   <span class="pulse-bar" style="width: 120px"></span>
@@ -1534,7 +1713,7 @@
               <td>Premium · Patrimoine historique</td>
             </tr>
             <tr>
-              <td><strong>Bollée</strong></td>
+              <td><strong>Bollée</strong><span class="pulse-mobile-profile">Familial · Très recherché</span></td>
               <td>
                 <div class="pulse-bar-wrap">
                   <span class="pulse-bar" style="width: 105px"></span>
@@ -1544,7 +1723,7 @@
               <td>Familial · Très recherché</td>
             </tr>
             <tr>
-              <td><strong>Gare Sud / Jaurès</strong></td>
+              <td><strong>Gare Sud / Jaurès</strong><span class="pulse-mobile-profile">Investisseur · TGV Paris 1h</span></td>
               <td>
                 <div class="pulse-bar-wrap">
                   <span class="pulse-bar" style="width: 90px"></span>
@@ -1554,7 +1733,7 @@
               <td>Investisseur · TGV Paris 1h</td>
             </tr>
             <tr>
-              <td><strong>Université / Ribay</strong></td>
+              <td><strong>Université / Ribay</strong><span class="pulse-mobile-profile">Locatif étudiant · Dynamique</span></td>
               <td>
                 <div class="pulse-bar-wrap">
                   <span class="pulse-bar" style="width: 78px"></span>
@@ -1564,7 +1743,7 @@
               <td>Locatif étudiant · Dynamique</td>
             </tr>
             <tr>
-              <td><strong>Pontlieue / Rocade</strong></td>
+              <td><strong>Pontlieue / Rocade</strong><span class="pulse-mobile-profile">Accessible · Primo-accédant</span></td>
               <td>
                 <div class="pulse-bar-wrap">
                   <span class="pulse-bar" style="width: 70px"></span>
@@ -1593,26 +1772,35 @@
     </div>
     
     <div class="calc-section" id="calculator">
-      <div class="section-tag">06 — Un petit aperçu</div>
+      <div class="section-tag">06 · Deux outils, une idée</div>
       <h2 class="section-title">
-        Un outil construit<br><em>en direct, ici</em>.
+        Ce que je peux<br><em>construire pour vous</em>.
       </h2>
-      
+
       <p class="calc-intro">
-        Une petite calculatrice de rentabilité locative interactive, codée pour ce portfolio.
-        Un exemple concret de ce que je peux faire avec mes outils digitaux, et que je
-        pourrais éventuellement adapter aux besoins de votre agence si l'occasion se présente.
+        Deux outils interactifs. Le premier est destiné à vos clients qui investissent
+        dans le locatif · je pourrais l'utiliser en rendez-vous pour les accompagner
+        dans leur décision. Le second est destiné à vous, pour répondre à une question
+        simple : est-ce qu'un alternant vaut vraiment l'investissement ?
       </p>
-      
+
+      <!-- OUTIL 1 : RENTABILITÉ LOCATIVE -->
+      <div class="demo-label">
+        <span class="demo-label-num">A</span>
+        <span class="demo-label-text">Rentabilité locative · pour vos clients investisseurs</span>
+      </div>
+
       <div class="calculator">
         <div class="calc-inputs">
           <div class="calc-presets">
             <span class="calc-presets-label">Exemples Le Mans :</span>
-            <button class="calc-preset" data-price="80000" data-rent="450" data-charges="1200">Studio centre</button>
-            <button class="calc-preset" data-price="180000" data-rent="750" data-charges="1500">T3 familial</button>
-            <button class="calc-preset" data-price="250000" data-rent="1100" data-charges="2200">Maison</button>
+            <button class="calc-preset" data-price="80000" data-rent="450" data-charges="1200" data-apport="20" data-duree="20" data-taux="3.5" data-assurance="0.20">Studio centre</button>
+            <button class="calc-preset" data-price="180000" data-rent="750" data-charges="1500" data-apport="20" data-duree="20" data-taux="3.5" data-assurance="0.20">T3 familial</button>
+            <button class="calc-preset" data-price="250000" data-rent="1100" data-charges="2200" data-apport="20" data-duree="25" data-taux="3.5" data-assurance="0.20">Maison</button>
           </div>
-          
+
+          <div class="calc-section-label">Le bien</div>
+
           <div class="calc-input-group">
             <label class="calc-label">Prix d'achat du bien</label>
             <div class="calc-input-wrapper">
@@ -1621,7 +1809,7 @@
             </div>
             <input type="range" class="calc-slider" id="calcPriceSlider" min="50000" max="800000" step="5000" value="180000">
           </div>
-          
+
           <div class="calc-input-group">
             <label class="calc-label">Loyer mensuel hors charges</label>
             <div class="calc-input-wrapper">
@@ -1630,7 +1818,7 @@
             </div>
             <input type="range" class="calc-slider" id="calcRentSlider" min="200" max="3000" step="25" value="750">
           </div>
-          
+
           <div class="calc-input-group">
             <label class="calc-label">Charges et taxes annuelles</label>
             <div class="calc-input-wrapper">
@@ -1639,41 +1827,183 @@
             </div>
             <input type="range" class="calc-slider" id="calcChargesSlider" min="0" max="10000" step="100" value="1500">
           </div>
+
+          <div class="calc-section-label" style="margin-top: 8px;">Financement</div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Apport personnel</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcApport" value="20" min="0" max="100" step="1">
+              <span class="calc-unit">%</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcApportSlider" min="0" max="50" step="1" value="20">
+          </div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Durée du prêt</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcDuree" value="20" min="5" max="30" step="1">
+              <span class="calc-unit">ans</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcDureeSlider" min="5" max="30" step="1" value="20">
+          </div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Taux d'intérêt annuel</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcTaux" value="3.5" min="0.1" max="10" step="0.05">
+              <span class="calc-unit">%</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcTauxSlider" min="0.5" max="7" step="0.05" value="3.5">
+          </div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Taux d'assurance emprunteur</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="calcAssurance" value="0.20" min="0" max="1" step="0.01">
+              <span class="calc-unit">%/an</span>
+            </div>
+            <input type="range" class="calc-slider" id="calcAssuranceSlider" min="0.05" max="0.80" step="0.01" value="0.20">
+          </div>
         </div>
-        
+
         <div class="calc-results">
           <div class="calc-result-title">→ Résultat en temps réel</div>
-          
+
           <div class="calc-result-main">
             <div class="calc-result-label">Rentabilité brute</div>
             <div class="calc-result-value">
               <span id="calcBrute" class="calc-result-value-accent">5,00</span><span class="calc-result-unit">%</span>
             </div>
           </div>
-          
+
           <div class="calc-result-secondary">
             <div>
               <div class="calc-result-label">Rentabilité nette</div>
               <div class="calc-result-small"><span id="calcNette">4,17</span>%</div>
             </div>
             <div>
-              <div class="calc-result-label">Cashflow / mois</div>
-              <div class="calc-result-small"><span id="calcCashflow">625</span>€</div>
+              <div class="calc-result-label">Rdt. fonds propres</div>
+              <div class="calc-result-small"><span id="calcRdtFP">12,4</span>%</div>
             </div>
           </div>
-          
-          <div class="calc-verdict" id="calcVerdict">
-            Rendement correct pour de la pierre patrimoniale en zone tendue.
+
+          <div class="calc-mensualite-block">
+            <div class="calc-mensualite-row">
+              <span class="calc-mensualite-label">Capital emprunté</span>
+              <span class="calc-mensualite-val" id="calcCapital">144 000 €</span>
+            </div>
+            <div class="calc-mensualite-row">
+              <span class="calc-mensualite-label">Frais de notaire (7,5%)</span>
+              <span class="calc-mensualite-val" id="calcNotaire">13 500 €</span>
+            </div>
+            <div class="calc-mensualite-row">
+              <span class="calc-mensualite-label">Mensualité crédit + assurance</span>
+              <span class="calc-mensualite-val" id="calcMensualite">853 €/mois</span>
+            </div>
+            <div class="calc-mensualite-row calc-mensualite-row--total">
+              <span class="calc-mensualite-label">Loyer · charges · mensualité</span>
+              <span class="calc-mensualite-val" id="calcCashflowNet" style="color: var(--rust)">-228 €/mois</span>
+            </div>
           </div>
-          
-          <div class="calc-footer">→ Calcul à titre indicatif</div>
+
+          <div class="calc-verdict" id="calcVerdict">
+            Effort mensuel négatif : l'investisseur complète chaque mois. Classique sur du patrimonial financé.
+          </div>
+          <div class="calc-footer">→ Calcul à titre indicatif · hors impôts · hors vacance locative</div>
+        </div>
+      </div>
+
+      <!-- OUTIL 2 : ROI ALTERNANCE -->
+      <div class="demo-label" style="margin-top: 64px;">
+        <span class="demo-label-num">B</span>
+        <span class="demo-label-text">ROI alternance · ce que ça représente concrètement pour votre agence</span>
+      </div>
+
+      <p class="roi-intro">
+        Prendre un alternant, c'est un coût. Mais c'est aussi un investissement.
+        La question que tout gérant se pose · souvent sans y répondre clairement ·
+        c'est : combien peut me rapporter un alternant bien intégré, comparé à ce
+        qu'il me coûte réellement ? Entrez vos chiffres pour le voir.
+      </p>
+
+      <div class="calculator roi-calc">
+        <div class="calc-inputs">
+          <div class="calc-input-group">
+            <label class="calc-label">Prix moyen de vente dans votre agence</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="roiPrice" value="200000" min="0">
+              <span class="calc-unit">€</span>
+            </div>
+            <input type="range" class="calc-slider" id="roiPriceSlider" min="80000" max="600000" step="10000" value="200000">
+          </div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Votre taux de commission moyen</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="roiRate" value="5" min="1" max="10" step="0.1">
+              <span class="calc-unit">%</span>
+            </div>
+            <input type="range" class="calc-slider" id="roiRateSlider" min="2" max="8" step="0.1" value="5">
+          </div>
+
+          <div class="calc-input-group">
+            <label class="calc-label">Mandats signés par mois actuellement</label>
+            <div class="calc-input-wrapper">
+              <input type="number" class="calc-input" id="roiMandats" value="4" min="1" max="30">
+              <span class="calc-unit">/ mois</span>
+            </div>
+            <input type="range" class="calc-slider" id="roiMandatsSlider" min="1" max="20" step="1" value="4">
+          </div>
+
+          <div class="roi-cost-note">
+            <span class="roi-cost-label">Coût réel de l'alternance</span>
+            <span class="roi-cost-value">≈ 820 €/mois</span>
+            <span class="roi-cost-detail">Salaire brut + charges patronales · financé en partie par l'OPCO</span>
+          </div>
+        </div>
+
+        <div class="calc-results roi-results">
+          <div class="calc-result-title">→ Projection sur 12 mois</div>
+
+          <div class="roi-scenarios">
+            <div class="roi-scenario">
+              <div class="roi-scenario-label">Situation actuelle</div>
+              <div class="roi-scenario-value" id="roiActuel">480 000 €</div>
+              <div class="roi-scenario-sub" id="roiActuelSub">CA estimé / an</div>
+            </div>
+            <div class="roi-scenario roi-scenario-mid">
+              <div class="roi-scenario-badge">+0,5 mandat/mois</div>
+              <div class="roi-scenario-label">Montée en régime</div>
+              <div class="roi-scenario-value roi-scenario-value--mid" id="roiPlus05">+12 000 €</div>
+              <div class="roi-scenario-sub">CA supplémentaire / an</div>
+            </div>
+            <div class="roi-scenario roi-scenario-best">
+              <div class="roi-scenario-badge roi-scenario-badge--best">+1 mandat/mois</div>
+              <div class="roi-scenario-label">Régime de croisière</div>
+              <div class="roi-scenario-value roi-scenario-value--best" id="roiPlus1">+24 000 €</div>
+              <div class="roi-scenario-sub">CA supplémentaire / an</div>
+            </div>
+          </div>
+
+          <div class="roi-ratio-wrap">
+            <div class="roi-ratio-label">ROI estimé sur 2 ans · scénario +1 mandat/mois</div>
+            <div class="roi-ratio-value" id="roiRatio">3,9×</div>
+            <div class="roi-ratio-sub">retour sur investissement par rapport au coût de l'alternance</div>
+          </div>
+
+          <div class="calc-verdict" id="roiVerdict">
+            Pour chaque euro investi dans l'alternance, l'agence en récupère environ 4 en CA supplémentaire.
+          </div>
+
+          <div class="calc-footer">→ Projections conservatives · à partir du 6ème mois · dépend de la formation reçue</div>
         </div>
       </div>
     </div>
     
     <!-- AVANT / APRÈS -->
     <div class="compare-section" id="avantapres">
-      <div class="section-tag">07 — Avant / Après</div>
+      <div class="section-tag">07 · Avant / Après</div>
       <h2 class="section-title">
         Le potentiel<br><em>qu'on ne voit pas tout de suite</em>.
       </h2>
@@ -1814,7 +2144,7 @@
     </div>
     
     <div class="map-section">
-      <div class="section-tag">08 — Sur quel secteur</div>
+      <div class="section-tag">08 · Sur quel secteur</div>
       <h2 class="section-title">
         Là où je peux<br><em>vraiment intervenir</em>.
       </h2>
@@ -2146,68 +2476,139 @@ window.addEventListener('scroll', () => {
 updateParallax();
 
 function updateCalc() {
-  const price = parseFloat(document.getElementById('calcPrice').value) || 0;
-  const rent = parseFloat(document.getElementById('calcRent').value) || 0;
-  const charges = parseFloat(document.getElementById('calcCharges').value) || 0;
-  
+  const price    = parseFloat(document.getElementById('calcPrice').value) || 0;
+  const rent     = parseFloat(document.getElementById('calcRent').value) || 0;
+  const charges  = parseFloat(document.getElementById('calcCharges').value) || 0;
+  const apportPct= parseFloat(document.getElementById('calcApport').value) || 0;
+  const duree    = parseFloat(document.getElementById('calcDuree').value) || 20;
+  const taux     = parseFloat(document.getElementById('calcTaux').value) || 3.5;
+  const assurance= parseFloat(document.getElementById('calcAssurance').value) || 0.20;
+
+  const fraisNotaire = price * 0.075;
+  const prixTotal    = price + fraisNotaire;
+  const apportEuros  = price * (apportPct / 100);
+  const capital      = price - apportEuros;
+  const nMois        = duree * 12;
+
+  // Mensualité crédit (formule annuité constante)
+  const tauxMensuel = (taux / 100) / 12;
+  let mensualiteCredit = 0;
+  if (tauxMensuel > 0 && capital > 0) {
+    mensualiteCredit = capital * (tauxMensuel * Math.pow(1 + tauxMensuel, nMois)) / (Math.pow(1 + tauxMensuel, nMois) - 1);
+  }
+
+  // Assurance emprunteur mensuelle sur capital initial
+  const mensualiteAssurance = (capital * (assurance / 100)) / 12;
+  const mensualiteTotale = mensualiteCredit + mensualiteAssurance;
+
   const yearlyRent = rent * 12;
-  
-  const bruteRate = price > 0 ? (yearlyRent / price) * 100 : 0;
-  const netteRate = price > 0 ? ((yearlyRent - charges) / price) * 100 : 0;
-  const cashflowMonth = (yearlyRent - charges) / 12;
-  
+  const chargesMois = charges / 12;
+
+  // Rentabilités
+  const bruteRate = prixTotal > 0 ? (yearlyRent / prixTotal) * 100 : 0;
+  const netteRate = prixTotal > 0 ? ((yearlyRent - charges) / prixTotal) * 100 : 0;
+
+  // Cashflow réel avec crédit
+  const cashflowNet = rent - chargesMois - mensualiteTotale;
+
+  // Rendement fonds propres (cashflow annuel / apport + frais notaire)
+  const fondsPropresTotaux = apportEuros + fraisNotaire;
+  const rdtFP = fondsPropresTotaux > 0 ? ((cashflowNet * 12) / fondsPropresTotaux) * 100 : 0;
+
+  const fmt = (n) => Math.round(Math.abs(n)).toLocaleString('fr-FR');
+
   document.getElementById('calcBrute').textContent = bruteRate.toFixed(2).replace('.', ',');
   document.getElementById('calcNette').textContent = netteRate.toFixed(2).replace('.', ',');
-  document.getElementById('calcCashflow').textContent = Math.round(cashflowMonth).toLocaleString('fr-FR');
-  
+  document.getElementById('calcRdtFP').textContent = rdtFP.toFixed(1).replace('.', ',');
+  document.getElementById('calcCapital').textContent = fmt(capital) + ' €';
+  document.getElementById('calcNotaire').textContent = fmt(fraisNotaire) + ' €';
+  document.getElementById('calcMensualite').textContent = Math.round(mensualiteTotale).toLocaleString('fr-FR') + ' €/mois';
+
+  const cfEl = document.getElementById('calcCashflowNet');
+  cfEl.textContent = (cashflowNet >= 0 ? '+' : '-') + fmt(cashflowNet) + ' €/mois';
+  cfEl.style.color = cashflowNet >= 0 ? '#6BBF7A' : 'var(--rust)';
+
   const verdict = document.getElementById('calcVerdict');
-  if (bruteRate < 3) {
-    verdict.textContent = "Rendement faible. Probablement un bien patrimonial en zone très tendue, à étudier autrement.";
-  } else if (bruteRate < 5) {
-    verdict.textContent = "Rendement correct pour de la pierre patrimoniale en zone tendue type centre Le Mans.";
-  } else if (bruteRate < 7) {
-    verdict.textContent = "Bon rendement. Profil équilibré entre rentabilité et qualité du bien.";
-  } else if (bruteRate < 10) {
-    verdict.textContent = "Excellent rendement. À surveiller : risque locatif, état du bien, qualité du secteur.";
+  if (cashflowNet >= 0) {
+    verdict.textContent = "Cashflow positif : le bien s'autofinance après crédit. Profil idéal pour un investisseur.";
+  } else if (cashflowNet > -200) {
+    verdict.textContent = "Effort mensuel faible. Classique sur du patrimonial financé : le locataire rembourse l'essentiel du crédit.";
+  } else if (cashflowNet > -500) {
+    verdict.textContent = "Effort mensuel modéré. L'investisseur complète chaque mois mais constitue du patrimoine.";
   } else {
-    verdict.textContent = "Rendement très élevé. Forte vigilance requise : vacance, dégradation, secteur difficile.";
+    verdict.textContent = "Effort mensuel élevé. À vérifier selon la capacité d'épargne de l'investisseur et la valorisation attendue.";
   }
 }
 
-['Price', 'Rent', 'Charges'].forEach(field => {
+['Price', 'Rent', 'Charges', 'Apport', 'Duree', 'Taux', 'Assurance'].forEach(field => {
   const input = document.getElementById(`calc${field}`);
   const slider = document.getElementById(`calc${field}Slider`);
-  
-  input.addEventListener('input', () => {
-    slider.value = input.value;
-    updateCalc();
-  });
-  
-  slider.addEventListener('input', () => {
-    input.value = slider.value;
-    updateCalc();
-  });
+  if (input && slider) {
+    input.addEventListener('input', () => { slider.value = input.value; updateCalc(); });
+    slider.addEventListener('input', () => { input.value = slider.value; updateCalc(); });
+  }
 });
 
 // Préréglages calculatrice
 document.querySelectorAll('.calc-preset').forEach(btn => {
   btn.addEventListener('click', () => {
-    const price = btn.dataset.price;
-    const rent = btn.dataset.rent;
-    const charges = btn.dataset.charges;
-    
-    document.getElementById('calcPrice').value = price;
-    document.getElementById('calcPriceSlider').value = price;
-    document.getElementById('calcRent').value = rent;
-    document.getElementById('calcRentSlider').value = rent;
-    document.getElementById('calcCharges').value = charges;
-    document.getElementById('calcChargesSlider').value = charges;
-    
+    const fields = { Price: 'price', Rent: 'rent', Charges: 'charges', Apport: 'apport', Duree: 'duree', Taux: 'taux', Assurance: 'assurance' };
+    Object.entries(fields).forEach(([key, data]) => {
+      const val = btn.dataset[data];
+      if (val) {
+        document.getElementById(`calc${key}`).value = val;
+        document.getElementById(`calc${key}Slider`).value = val;
+      }
+    });
     updateCalc();
   });
 });
 
 updateCalc();
+
+// ============ ROI ALTERNANCE ============
+function updateROI() {
+  const price = parseFloat(document.getElementById('roiPrice').value) || 0;
+  const rate = parseFloat(document.getElementById('roiRate').value) || 0;
+  const mandats = parseFloat(document.getElementById('roiMandats').value) || 0;
+  const coutAnnuel = 820 * 12;
+
+  const commission = price * (rate / 100);
+  const caActuel = commission * mandats * 12;
+  const caPlus05 = commission * 0.5 * 12;
+  const caPlus1 = commission * 1 * 12;
+  const roi = caPlus1 / coutAnnuel;
+
+  const fmt = (n) => Math.round(n).toLocaleString('fr-FR');
+
+  document.getElementById('roiActuel').textContent = fmt(caActuel) + ' €';
+  document.getElementById('roiActuelSub').textContent = 'CA estimé / an · ' + mandats + ' mandats';
+  document.getElementById('roiPlus05').textContent = '+' + fmt(caPlus05) + ' €';
+  document.getElementById('roiPlus1').textContent = '+' + fmt(caPlus1) + ' €';
+  document.getElementById('roiRatio').textContent = roi.toFixed(1) + '×';
+
+  const verdict = document.getElementById('roiVerdict');
+  if (roi < 1.5) {
+    verdict.textContent = "Sur ce niveau de prix, la valeur ajoutée se situe davantage sur le volume de mandats que sur la marge unitaire.";
+  } else if (roi < 3) {
+    verdict.textContent = "Pour chaque euro investi dans l'alternance, l'agence récupère " + roi.toFixed(1) + "× en CA supplémentaire. Un retour raisonnable dès la première année.";
+  } else if (roi < 6) {
+    verdict.textContent = "Pour chaque euro investi dans l'alternance, l'agence en récupère " + roi.toFixed(1) + " en CA supplémentaire. Un investissement rentable sur 2 ans.";
+  } else {
+    verdict.textContent = "Retour très élevé sur ce niveau de prix. Un seul mandat supplémentaire par mois couvre plusieurs fois le coût de l'alternance sur 2 ans.";
+  }
+}
+
+['roiPrice', 'roiRate', 'roiMandats'].forEach(id => {
+  const input = document.getElementById(id);
+  const slider = document.getElementById(id + 'Slider');
+  if (input && slider) {
+    input.addEventListener('input', () => { slider.value = input.value; updateROI(); });
+    slider.addEventListener('input', () => { input.value = slider.value; updateROI(); });
+  }
+});
+
+updateROI();
 
 const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -10% 0px' };
 
